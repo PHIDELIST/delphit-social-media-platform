@@ -1,1 +1,0 @@
-# delphit-social-media-platform
