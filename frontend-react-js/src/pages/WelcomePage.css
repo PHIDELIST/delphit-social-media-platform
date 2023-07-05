@@ -1,12 +1,16 @@
-#Home-Page{
+#Welcome-Page{
 display: flex;
 flex-direction: column;
 
 }
-#homepage-header{
+#welcomepage-header{
     color: black;
     font-style: oblique;
     font-weight: 700;
     font-size: 30px;
     border-bottom: 1px solid #7f8a86;
+}
+#welcomepage-img img{
+    width:100%;
+    height: 400px;
 }

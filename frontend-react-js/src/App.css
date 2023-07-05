@@ -1,6 +1,21 @@
 #root {
-  max-width: 1280px;
+  max-width: 1480px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  background-color: #F5F7F9;
+  height: 98vh;
+}
+#landing-page{
+  display: flex;
+  flex-direction: row;
+}
+#pages{
+  width: 80%;
+}
+#NavRight{
+  width: 25%;
+  
+}
+#NavLeft{
+  width: 15%;
 }
