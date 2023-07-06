@@ -6,6 +6,7 @@ import RightSideNav from './components/RightSideNav'
 import WelcomePage from './pages/WelcomePage'
 import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
+import ProfilePage from './pages/ProfilePage'
 
 
 
@@ -22,6 +23,7 @@ function App() {
       <Route path="/home" element={<Homepage/>}/>
       <Route path="/signin" element={<LoginPage />}/>
       <Route path="/signup" element={<SignUpPage />}/>
+      <Route path="/profile" element={<ProfilePage />}/>
     </Routes>
     </div>
     <div id='NavRight'><RightSideNav /></div>

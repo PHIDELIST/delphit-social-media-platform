@@ -1,6 +1,7 @@
 import Logo from "../assets/Logo.png"
 import './LeftSideNav.css'
 import {useNavigate} from 'react-router-dom'
+import Avatar from '../components/Avatar'
  function LeftSideNav() {
   const navigate = useNavigate();
   return (
@@ -15,7 +16,7 @@ import {useNavigate} from 'react-router-dom'
         <button id="leftnav-btn" onClick={()=>navigate('/profile')}>Profile</button>
        
       </div>
-      <button id="leftnav-btn" onClick={()=>navigate('/avatar')}>Avatar @delphino</button>
+      <div id="leftnav-avatar" ><Avatar /> @delphino</div>
     </div>
     </>
   )
