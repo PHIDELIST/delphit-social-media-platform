@@ -4,6 +4,9 @@ import LeftSideNav from './components/LeftSideNav'
 import Homepage from './pages/Homepage'
 import RightSideNav from './components/RightSideNav'
 import WelcomePage from './pages/WelcomePage'
+import SignUpPage from './pages/SignUpPage'
+import LoginPage from './pages/LoginPage'
+
 
 
 function App() {
@@ -17,6 +20,8 @@ function App() {
     <Routes>
       <Route path="/" element={<WelcomePage />}/>
       <Route path="/home" element={<Homepage/>}/>
+      <Route path="/signin" element={<LoginPage />}/>
+      <Route path="/signup" element={<SignUpPage />}/>
     </Routes>
     </div>
     <div id='NavRight'><RightSideNav /></div>
