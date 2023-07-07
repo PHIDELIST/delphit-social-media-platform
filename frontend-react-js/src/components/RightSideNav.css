@@ -6,6 +6,8 @@
     flex-direction: column;
     gap: 10rem;
     align-items: center;
+    position: fixed;
+    width: 20.5%;
 }
 #searchBar{
     display: flex;

@@ -1,6 +1,6 @@
 import sql from 'mssql';
 import config from '../db/config.js';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 export const register = async (req, res) => {
     const { name, email, password} = req.body;

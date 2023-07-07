@@ -1,7 +1,12 @@
 #Home-Page{
 display: flex;
 flex-direction: column;
-
+height: 100%;
+overflow-y: scroll;
+background-color: #F5F7F9;
+align-items: center;
+justify-content: center;
+padding-left: 20px;
 }
 #homepage-header{
     color: black;
