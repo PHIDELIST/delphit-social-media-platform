@@ -12,7 +12,7 @@ function ChatWindow({ chat, onBack }) {
         {chat.lastMessage}
       </div>
       <div className="chat-input">
-        <input type="text" placeholder="Type your message..." />
+        <textarea type="text" placeholder="Type your message..." />
         <button>Send</button>
       </div>
     </div>

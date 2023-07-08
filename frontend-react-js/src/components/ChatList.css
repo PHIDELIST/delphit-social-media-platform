@@ -21,3 +21,6 @@
    flex-direction: column;
    gap: 3px;
 }
+.chat-list{
+    list-style: none;
+}

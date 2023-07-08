@@ -1,0 +1,21 @@
+.LoginPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+
+}
+.login-form{
+    margin-top: 5em;
+}
+.login-form input{
+    width: 300px;
+    height: 40px;
+}
+.login-form button{
+    width: 80px;
+    height: 30px;
+    background-color: #74ABF3;
+}

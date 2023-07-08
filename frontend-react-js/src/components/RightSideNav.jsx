@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
     <div id='rightSideNav'>
       <div id='searchBar'>
         <input type="search" placeholder='Search' />
-        <button onClick={handleSearch}><i className="fa-solid fa-magnifying-glass"></i>Search</button>
+        <button id='searchBtn' onClick={handleSearch}><i className="fa-solid fa-magnifying-glass"></i>Search</button>
       </div>
       <div id='signin-signup'>
         <button onClick={handleSignIn}>Sign In</button>

@@ -15,6 +15,15 @@
     gap: 3px;
     align-items: center;
     justify-content: center;  
+    
+    
+}
+#searchBar input{
+    height: 25px;
+
+}
+#searchBtn{
+  height: 25px;
 }
 #searchBar input{
     background-color: #D4E6F3;
