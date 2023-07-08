@@ -7,6 +7,10 @@ import WelcomePage from './pages/WelcomePage'
 import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import ProfilePage from './pages/ProfilePage'
+import Chat from './components/Chat'
+import NotificationsPage from './pages/NotificationsPage'
+import FriendsPage from './pages/FriendsPage'
+
 
 
 
@@ -21,9 +25,12 @@ function App() {
     <Routes>
       <Route path="/" element={<WelcomePage />}/>
       <Route path="/home" element={<Homepage/>}/>
+      <Route path="/chats" element={<Chat />}></Route>
       <Route path="/signin" element={<LoginPage />}/>
       <Route path="/signup" element={<SignUpPage />}/>
       <Route path="/profile" element={<ProfilePage />}/>
+      <Route path="/notifications" element={<NotificationsPage />}></Route>
+      <Route path="/friends" element ={<FriendsPage />}></Route>
     </Routes>
     </div>
     <div id='NavRight'><RightSideNav /></div>

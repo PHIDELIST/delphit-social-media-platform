@@ -1,7 +1,4 @@
-.notifications-container{
-    background-color: #F5F7F9;
-}
-.notification-item{
+.friend-item{
     display: flex;
     flex-direction: row;
     gap: 5rem;
@@ -11,10 +8,9 @@
     background-color: #EFF1F3;
     border-bottom: 1px solid gainsboro;
     margin: 10px;
-    
 }
-.notification-avatar {
-   display: flex;
-   flex-direction: column;
-   gap: 3px;
+.friend-avatar{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }

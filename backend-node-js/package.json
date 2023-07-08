@@ -24,6 +24,7 @@
     "jsonwebtoken": "^9.0.1",
     "mssql": "^9.1.1",
     "nodemon": "^2.0.22",
-    "rollbar": "^2.26.2"
+    "rollbar": "^2.26.2",
+    "socket.io": "^4.7.1"
   }
 }

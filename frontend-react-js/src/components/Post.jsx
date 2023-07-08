@@ -1,36 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Avatar from '../assets/Avatar.jpg';
+import './Post.css';
+import Comments from './Comments.jsx';
+import CommentForm from '../form/CommentForm.jsx';
 
+function Post() {
+  const username = 'phidel';
+  const avatar = Avatar;
+  const content =
+    'A black hole is a region of spacetime where gravity is so strong that nothing, including light or other electromagnetic waves, has enough energy to escape it. The theory of general relativity predicts that a sufficiently compact mass can deform spacetime to form a black hole.';
+  const image = Avatar;
 
-import Avatar from '../assets/Avatar.jpg'
-import './Post.css'
+  const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState(['This is the first comment']);
+  const [likes, setLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [reposts, setReposts] = useState(0);
+  const [isReposted, setIsReposted] = useState(false);
 
-function Post ({ username, avatar, content, image, likes, comments }){ //this are props that will be passed later
+  const handleToggleComments = () => {
+    setShowComments(!showComments);
+  };
+
+  const handleAddComment = (comment) => {
+    setComments([...comments, comment]);
+  };
+
+  const handleLike = () => {
+    if (isLiked) {
+      setLikes(likes - 1);
+    } else {
+      setLikes(likes + 1);
+    }
+    setIsLiked(!isLiked);
+  };
+
+  const handleRepost = () => {
+    if (isReposted) {
+      setReposts(reposts - 1);
+    } else {
+      setReposts(reposts + 1);
+    }
+    setIsReposted(!isReposted);
+  };
+
   return (
     <div className="post">
       <div className="post-header">
-        <img src={Avatar} alt="Avatar" className="post-avatar" />
-        <h4>@phidel</h4>
+        <img src={avatar} alt="Avatar" className="post-avatar" />
+        <h4>@{username}</h4>
       </div>
       <div className="post-content">
-        <p>A black hole is a region of spacetime where gravity is so strong that nothing, including light or other electromagnetic waves, has enough energy to escape it. The theory of general relativity predicts that a sufficiently compact mass can deform spacetime to form a black hole.</p>
-        <img src={Avatar} alt="Post" className="post-image" />
+        <p>{content}</p>
+        <img src={image} alt="Post" className="post-image" />
       </div>
       <div className="post-actions">
-        <div className="like-action">
-          <i className="far fa-thumbs-up"></i>
-          <span>like</span>
-         
+        <div className="like-action" onClick={handleLike}>
+          <i className={isLiked ? 'fas fa-thumbs-up' : 'far fa-thumbs-up'}></i>
+          <span>{isLiked ? 'Liked' : 'Like'}</span>
+          <span>{likes}</span>
         </div>
-        <div className="comment-action">
+        <div className="comment-action" onClick={handleToggleComments}>
           <i className="far fa-comment"></i>
-          <span>comment</span>
+          <span>Comment</span>
         </div>
-        <div className="share-action">
-          <i className="fas fa-share"></i>
+        <div className="repost-action" onClick={handleRepost}>
+          <i className={isReposted ? 'fas fa-retweet' : 'far fa-retweet'}></i>
+          <span>{isReposted ? 'Reposted' : 'Repost'}</span>
+          <span>{reposts}</span>
         </div>
       </div>
+      {showComments && (
+        <div className="comments-container">
+          <Comments comments={comments} />
+        </div>
+      )}
+      {showComments && (
+        <div className="comment-form-container">
+          {comments.length > 0 && <hr />}
+          <CommentForm onAddComment={handleAddComment} />
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default Post;

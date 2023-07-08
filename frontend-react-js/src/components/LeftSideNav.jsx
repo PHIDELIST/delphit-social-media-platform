@@ -10,7 +10,7 @@ import Avatar from '../components/Avatar'
       <img id="logo" src={Logo} alt="logo" />
       <div id="leftnav-btns">
         <button id="leftnav-btn" onClick={()=>navigate('/home')}>Home</button>
-        <button id="leftnav-btn" onClick={()=>navigate('/notification')}>Notification</button>
+        <button id="leftnav-btn" onClick={()=>navigate('/notifications')}>Notification</button>
         <button id="leftnav-btn" onClick={()=>navigate('/chats')}>Chats</button>
         <button id="leftnav-btn" onClick={()=>navigate('/friends')}>Friends</button>
         <button id="leftnav-btn" onClick={()=>navigate('/profile')}>Profile</button>

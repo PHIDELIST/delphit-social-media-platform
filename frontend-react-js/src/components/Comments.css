@@ -1,0 +1,49 @@
+.feedback-options button {
+    margin-right: 10px;
+  }
+  
+  .ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 9999;
+  }
+  
+  .ReactModal__Content {
+    width: 400px !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+  }
+  #feedbackText{
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  @media screen and (max-width: 480px) {
+    .feedback-formthumbs {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+      height: 20vh;
+      padding: 0px;
+  
+    }
+    #feedbackText{
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      margin-left: 5px;
+      margin-right: 5px;
+      height: 20vh;
+      margin-bottom: 5px;
+  }
+  .ReactModal__Content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 200px !important;
+    height: 50%;
+  }
+  }
