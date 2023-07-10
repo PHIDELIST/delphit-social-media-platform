@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import placeholderImage from "../assets/placeholder.jpg";
 import './EditProfilePage.css'
+import {useDispatch} from "react-redux"
+import {homeUI} from "../redux/uiSlice";
 
 export default function ProfileForm() {
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [previewAvatar, setPreviewAvatar] = useState(null);
-
+  const dispatch = useDispatch();
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
-
+  const handleProfile = () => {
+    dispatch(homeUI("profile"));
+  };
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     setAvatar(file);
@@ -33,7 +37,10 @@ export default function ProfileForm() {
   };
 
   return (
+    <>
+    <button onClick={handleProfile}>&larr; Back</button>
     <div className="profile-form">
+      
       <input
         type="file"
         name="avatarupload"
@@ -53,5 +60,6 @@ export default function ProfileForm() {
       ></textarea>
       <button onClick={handleUpdateProfile}>Update Profile</button>
     </div>
+    </>
   );
 }

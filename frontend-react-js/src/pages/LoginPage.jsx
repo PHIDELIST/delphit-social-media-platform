@@ -20,8 +20,9 @@ function LoginPage() {
     try {
       const response = await axios.post('http://localhost:8081/auth/login', data);
       console.log(response.data); 
-      navigate('/home');
+      navigate('/');
     } catch (error) {
+      alert(error.response.data.message)
       console.log('Error:', error);
     
     }
@@ -37,6 +38,9 @@ function LoginPage() {
         <p>{errors.password?.message}</p>
         <button type="submit">Login</button>
       </form>
+      <p>
+            New here? <a href="/signup">SignUp</a>
+          </p>
     </div>
   );
 }

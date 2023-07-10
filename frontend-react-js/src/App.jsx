@@ -25,15 +25,15 @@ function App() {
     
     <Routes>
       <Route path="/" element={<MainPage/>}/>
-      <Route path="/home" element={<Homepage/>}/>
-      <Route path="/chats" element={<Chat />}></Route>
       <Route path="/signin" element={<LoginPage />}/>
       <Route path="/signup" element={<SignUpPage />}/>
+      {/* <Route path="/home" element={<Homepage/>}/>
+      <Route path="/chats" element={<Chat />}></Route>
       <Route path="/profile" element={<ProfilePage />}/>
       <Route path="/notifications" element={<NotificationsPage />}></Route>
-      <Route path="/friends" element ={<FriendsPage />}></Route>
-      <Route path='/createpost' element={<PostCreationPage />}></Route>
-      <Route path='/editprofile' element={<EditProfilePage />}></Route>
+      <Route path="/friends" element ={<FriendsPage />}></Route> */}
+      {/* <Route path='/createpost' element={<PostCreationPage />}></Route>
+      <Route path='/editprofile' element={<EditProfilePage />}></Route> */}
     </Routes>
    
     </BrowserRouter>

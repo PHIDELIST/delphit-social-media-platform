@@ -46,6 +46,16 @@ function MainPage (){
                 <h3>Friends</h3>
                 <FriendsPage />
                 </div>
+             ): ui == 'editprofile' ? (
+                <div id='mainpage_wrapper'>
+                <h3>edit</h3>
+                <EditProfilePage />
+                </div>
+             ): ui == 'createpost' ? (
+                <div id='mainpage_wrapper'>
+                <h3>edit</h3>
+                <PostCreationPage />
+                </div>
              ): null 
         }
         </div>

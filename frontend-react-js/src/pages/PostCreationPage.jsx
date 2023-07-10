@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './PostCreationPage.css';
 import placeholder from '../assets/placeholder.jpg';
-
+import {useDispatch} from "react-redux"
+import {homeUI} from "../redux/uiSlice";
 function PostCreationPage() {
   const [text, setText] = useState('');
   const [image, setImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-
+  const dispatch = useDispatch();
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
@@ -25,7 +26,9 @@ function PostCreationPage() {
       setPreviewImage(null);
     }
   };
-
+  const handleProfile = () => {
+    dispatch(homeUI("profile"));
+  };
   const handlePost = () => {
     console.log('Text:', text);
     console.log('Image:', image);
@@ -38,6 +41,7 @@ function PostCreationPage() {
   return (
     <div className="post-container">
       <h2>Create a Post</h2>
+      <button onClick={handleProfile}>&larr; Back</button>
       <div className="post-form">
         <textarea
           value={text}
