@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaThumbsUp, FaComment, FaRetweet } from 'react-icons/fa';
 import Avatar from '../assets/Avatar.jpg';
 import './Post.css';
 import Comments from './Comments.jsx';
@@ -56,16 +57,24 @@ function Post() {
       </div>
       <div className="post-actions">
         <div className="like-action" onClick={handleLike}>
-          <i className={isLiked ? 'fas fa-thumbs-up' : 'far fa-thumbs-up'}></i>
+          {isLiked ? (
+            <FaThumbsUp className="icon-liked" />
+          ) : (
+            <FaThumbsUp className="icon" />
+          )}
           <span>{isLiked ? 'Liked' : 'Like'}</span>
           <span>{likes}</span>
         </div>
         <div className="comment-action" onClick={handleToggleComments}>
-          <i className="far fa-comment"></i>
+          <FaComment className="icon" />
           <span>Comment</span>
         </div>
         <div className="repost-action" onClick={handleRepost}>
-          <i className={isReposted ? 'fas fa-retweet' : 'far fa-retweet'}></i>
+          {isReposted ? (
+            <FaRetweet className="icon-liked" />
+          ) : (
+            <FaRetweet className="icon" />
+          )}
           <span>{isReposted ? 'Reposted' : 'Repost'}</span>
           <span>{reposts}</span>
         </div>

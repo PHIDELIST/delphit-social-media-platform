@@ -55,7 +55,7 @@ function ChatList({ onSelectChat }) {
 
   return (
     <div className="chat-list-container">
-      <h2>Chats</h2>
+      
       <ul className="chat-list">
         {chats.map((chat) => (
           <li key={chat.id} onClick={() => handleChatClick(chat)}>

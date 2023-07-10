@@ -34,8 +34,29 @@
     max-width: 100%;
     margin-bottom: 2px;
   }
-  
   .post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .post-actions .icon {
+    color: #0a66c2;
+    margin-right: 5px;
+  }
+  
+  .post-actions .icon-liked {
+    color: #0a66c2;
+    margin-right: 5px;
+  }
+  
+  .post-actions span {
+    margin-right: 10px;
+  }
+  
+  /* .post-actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,4 +78,4 @@
   .post-actions > div span {
     font-size: 14px;
   }
-  
+   */

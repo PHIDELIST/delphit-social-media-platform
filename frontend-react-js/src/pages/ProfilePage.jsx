@@ -2,12 +2,19 @@
 import './ProfilePage.css';
 import Welcome from '../assets/Welcome.jpg';
 import Avatar from '../assets/Avatar.jpg'; 
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfilePage() {
   
+const navigate = useNavigate();
 
+const createpost = () => {
+  navigate('/createpost');
 
-  
+}
+const editprofile =() => {
+  navigate('/editprofile');
+}
   return (
     <>
       <div id='profilepage-main'>
@@ -21,7 +28,7 @@ export default function ProfilePage() {
             </div>
           <div className="email-editprofile">
             <h6>Email: delphino@gmail.com</h6>
-            <button id='logout'> Edit Profile</button>
+            <button onClick={editprofile}id='logout'> Edit Profile</button>
           </div>
           
           <div className='bio'>
@@ -29,7 +36,7 @@ export default function ProfilePage() {
             <p> I am a full stack cloud developer with a particular interest in making things simple and automating daily tasks. I try to keep up with security and best practices, and am always looking for new things to learn. </p>
           </div>
           <div className="post-logout">
-           <button>Create Post</button>
+           <button onClick={createpost}>Create Post</button>
             <button id='logout'> Logout</button>
           </div>
           

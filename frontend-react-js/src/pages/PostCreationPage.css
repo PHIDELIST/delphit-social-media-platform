@@ -1,21 +1,17 @@
-.profile-form {
-    max-width: 400px;
+.post-container {
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .profile-form h2 {
+  .post-container h2 {
     font-size: 24px;
     margin-bottom: 20px;
   }
   
-  .profile-form input[type="file"] {
-    margin-bottom: 20px;
-  }
-  
-  .profile-form textarea {
+  .post-form textarea {
     width: 100%;
     min-height: 100px;
     padding: 10px;
@@ -26,35 +22,25 @@
     margin-bottom: 20px;
   }
   
-  .profile-form .avatar-preview {
+  .image-preview {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #f2f2f2;
     margin-bottom: 20px;
-    overflow: hidden;
   }
   
-  .profile-form .avatar-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 4px;
   }
   
-  .profile-form .avatar-preview .placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    color: #999;
-    font-size: 32px;
+  .input-file {
+    display: none;
   }
   
-  .profile-form button {
+  .input-file-label {
+    display: inline-block;
     background-color: #0a66c2;
     color: #fff;
     border: none;
@@ -64,7 +50,7 @@
     cursor: pointer;
   }
   
-  .profile-form button:hover {
+  .input-file-label:hover {
     background-color: #094c8d;
   }
   

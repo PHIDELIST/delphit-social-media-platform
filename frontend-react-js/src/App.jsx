@@ -10,6 +10,9 @@ import ProfilePage from './pages/ProfilePage'
 import Chat from './components/Chat'
 import NotificationsPage from './pages/NotificationsPage'
 import FriendsPage from './pages/FriendsPage'
+import PostCreationPage from './pages/PostCreationPage'
+import EditProfilePage from './pages/EditProfilePage'
+import MainPage from './pages/MainPage'
 
 
 
@@ -19,11 +22,9 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <div id='landing-page'>
-    <div id='NavLeft'><LeftSideNav/></div>
-    <div id='pages'>
+    
     <Routes>
-      <Route path="/" element={<WelcomePage />}/>
+      <Route path="/" element={<MainPage/>}/>
       <Route path="/home" element={<Homepage/>}/>
       <Route path="/chats" element={<Chat />}></Route>
       <Route path="/signin" element={<LoginPage />}/>
@@ -31,10 +32,10 @@ function App() {
       <Route path="/profile" element={<ProfilePage />}/>
       <Route path="/notifications" element={<NotificationsPage />}></Route>
       <Route path="/friends" element ={<FriendsPage />}></Route>
+      <Route path='/createpost' element={<PostCreationPage />}></Route>
+      <Route path='/editprofile' element={<EditProfilePage />}></Route>
     </Routes>
-    </div>
-    <div id='NavRight'><RightSideNav /></div>
-    </div>
+   
     </BrowserRouter>
     
     </>

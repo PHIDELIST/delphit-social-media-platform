@@ -1,0 +1,14 @@
+#landing-page{
+    display: flex;
+    flex-direction: row;
+  }
+  #pages{
+    width: 80%;
+  }
+  #NavRight{
+    width: 25%;
+    
+  }
+  #NavLeft{
+    width: 15%;
+  }

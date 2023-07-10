@@ -22,7 +22,7 @@ function FriendsPage() {
 
   return (
     <div className="friends-page-container">
-      <h2>Friends</h2>
+      
       <ul className="friend-list">
         {friends.map((friend) => (
           <FriendItem key={friend.id} friend={friend} />

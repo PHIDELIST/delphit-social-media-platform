@@ -56,7 +56,7 @@ function NotificationsPage() {
 
   return (
     <div className="notifications-container">
-      <h2>Notifications</h2>
+    
       {notifications.length === 0 ? (
         <p>No new notifications</p>
       ) : (

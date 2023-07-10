@@ -1,25 +1,38 @@
 import Logo from "../assets/Logo.png";
 import "./LeftSideNav.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Avatar from "../components/Avatar";
-import {
-  FaBars,
-  FaHome,
-  FaBell,
-  FaComments,
-  FaUserFriends,
-  FaUser,
-} from "react-icons/fa";
+import { FaBars, FaHome, FaBell, FaComments, FaUserFriends, FaUser,} from "react-icons/fa";
+import {useDispatch} from "react-redux"
+import {homeUI} from "../redux/uiSlice";
+
+
 
 function LeftSideNav() {
-  const navigate = useNavigate();
-  const [showNavButtons, setShowNavButtons] = useState(true);
+  const dispatch = useDispatch();
 
+  const [showNavButtons, setShowNavButtons] = useState(true);
   const toggleNavButtons = () => {
     setShowNavButtons(!showNavButtons);
   };
+  const handleHome = ()=> {
+    dispatch(homeUI("home"));
+  };
+  const handleNotifications = () =>{
+    dispatch(homeUI("notifications"));
+  };
+  const handleChats = () => {
+    dispatch(homeUI("chats"));
+  };
+  const handleFriends = () => {
+    dispatch(homeUI("friends"));
+  };
+  const handleProfile = () => {
+    dispatch(homeUI("profile"));
+  };
 
+  
   return (
     <>
       <div id="leftSideNav" className={showNavButtons ? "" : "compressed"}>
@@ -28,19 +41,19 @@ function LeftSideNav() {
           id="leftnav-btns"
           className={showNavButtons ? "show" : "hide"}
         >
-          <button id="leftnav-btn" onClick={() => navigate("/home")}>
+          <button id="leftnav-btn" onClick={handleHome}>
             <FaHome size={32} id="icons" /> <span>Home</span>
           </button>
-          <button id="leftnav-btn" onClick={() => navigate("/notifications")}>
+          <button id="leftnav-btn" onClick={handleNotifications}>
             <FaBell size={32} id="icons" /> <span>Notifications</span>
           </button>
-          <button id="leftnav-btn" onClick={() => navigate("/chats")}>
+          <button id="leftnav-btn" onClick={handleChats}>
             <FaComments size={32} id="icons" /><span>Chats</span>
           </button>
-          <button id="leftnav-btn" onClick={() => navigate("/friends")}>
+          <button id="leftnav-btn" onClick={handleFriends}>
             <FaUserFriends size={32} id="icons" /><span>Friends</span>
           </button>
-          <button id="leftnav-btn" onClick={() => navigate("/profile")}>
+          <button id="leftnav-btn" onClick={handleProfile}>
             <FaUser size={32} id="icons" /><span>Profile</span>
           </button>
         </div>

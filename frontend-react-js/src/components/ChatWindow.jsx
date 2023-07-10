@@ -1,5 +1,7 @@
 import React from 'react';
 import './ChatWindow.css';
+import { FaPaperPlane } from 'react-icons/fa';
+
 
 function ChatWindow({ chat, onBack }) {
   return (
@@ -13,7 +15,7 @@ function ChatWindow({ chat, onBack }) {
       </div>
       <div className="chat-input">
         <textarea type="text" placeholder="Type your message..." />
-        <button>Send</button>
+        <button><FaPaperPlane /></button>
       </div>
     </div>
   );
