@@ -9,26 +9,7 @@
     position: fixed;
     width: 20.5%;
 }
-#searchBar{
-    display: flex;
-    flex-direction: row;
-    gap: 3px;
-    align-items: center;
-    justify-content: center;  
-    
-    
-}
-#searchBar input{
-    height: 25px;
 
-}
-#searchBtn{
-  height: 25px;
-}
-#searchBar input{
-    background-color: #D4E6F3;
-    color: #7F8A86;
-}
 #signin-signup {
     display: flex;
     flex-direction: column;
@@ -43,7 +24,19 @@
     overflow: hidden;
     border-radius: 20px;
   }
-  
+  #trends{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    height: 254px;
+    background: #EFF1F3;
+    position: relative;
+    display: flex;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 20px;
+  }
   #signin-signup button {
     z-index: 1;
     color: #7F8A86;

@@ -10,9 +10,10 @@ export const userSlice = createSlice({
   name: 'user',
   reducers: {
     login: (state, action) => {
-      const { user, token, userID, } = action.payload;
+      const { user, email,token, userID, } = action.payload;
       console.log(action.payload)
       state.user = user;
+      state.email = email;
       state.userID = userID;
       state.token = token;
       localStorage.setItem('user', JSON.stringify(action.payload));

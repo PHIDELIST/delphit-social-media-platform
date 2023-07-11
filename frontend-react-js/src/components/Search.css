@@ -1,0 +1,23 @@
+#search{
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    align-items: center;
+    justify-content: center; 
+    margin-top: 10px; 
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+    
+    
+}
+#search input{
+    height: 25px;
+
+}
+#search-btn{
+  height: 25px;
+}
+#search input{
+    background-color: #D4E6F3;
+    color: #7F8A86;
+}

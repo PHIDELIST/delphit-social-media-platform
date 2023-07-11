@@ -13,18 +13,17 @@ import FriendsPage from './pages/FriendsPage'
 import PostCreationPage from './pages/PostCreationPage'
 import EditProfilePage from './pages/EditProfilePage'
 import MainPage from './pages/MainPage'
-
-
+import { useSelector } from 'react-redux'
 
 
 function App() {
-
+const user = useSelector(state => state.user.userID);
   return (
     <>
     <BrowserRouter>
     
     <Routes>
-      <Route path="/" element={<MainPage/>}/>
+      <Route path="/" element={user? <MainPage/> :<SignUpPage />}/>
       <Route path="/signin" element={<LoginPage />}/>
       <Route path="/signup" element={<SignUpPage />}/>
       {/* <Route path="/home" element={<Homepage/>}/>

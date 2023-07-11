@@ -13,6 +13,7 @@ import EditProfilePage from './EditProfilePage'
 import HomePage from "./Homepage";
 import './MainPage.css'
 import {useSelector } from 'react-redux';
+import Search from '../components/Search'
 function MainPage (){
     const {ui} = useSelector(state => state.ui)
     return(
@@ -20,6 +21,7 @@ function MainPage (){
     <div id='landing-page'>
         <div id='NavLeft'><LeftSideNav/></div>
         <div id='pages'>
+            <Search />
         {
             ui =='profile' ? (
                 <div id='mainpage_wrapper'>
@@ -56,6 +58,11 @@ function MainPage (){
                 <h3>edit</h3>
                 <PostCreationPage />
                 </div>
+             ): ui == 'search' ? (
+                <div id='mainpage_wrapper'>
+                    <Search />
+             </div>
+                   
              ): null 
         }
         </div>

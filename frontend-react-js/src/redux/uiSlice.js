@@ -38,6 +38,9 @@ const uiSlice = createSlice({
             state.ui = action.payload;
             localStorage.setItem("ui", action.payload);
         
+        },searchUI:(state,action) => {
+            state.ui = action.payload;
+            localStorage.setItem("ui", action.payload);
         }
     }
 })

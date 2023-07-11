@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { url } from '../utilis';
 import axios from 'axios';
+import { login } from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
 function LoginPage() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function LoginPage() {
         .then(({data}) => {
           console.log(data);
           if(data.token){
-           localStorage.setItem('token', data.token);
+            dispatch(login({token: data.token, email: data.email,user:data.user,userID:data.userID}))
             navigate('/');
           }
         })
