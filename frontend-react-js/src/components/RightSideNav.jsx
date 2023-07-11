@@ -1,6 +1,7 @@
 import React from 'react'
 import './RightSideNav.css'
 import { useNavigate } from 'react-router-dom';
+// import ProfileForm from './AvatarUpload';
  function RightSideNav() {
   const navigate = useNavigate();
   const handleSearch = () => {
@@ -23,7 +24,7 @@ import { useNavigate } from 'react-router-dom';
         <button onClick={handleSignIn}>Sign In</button>
         <button onClick={handleSignUp}>Sign Up</button>
       </div>
-
+    {/* < ProfileForm /> */}
     </div>
   )
 }

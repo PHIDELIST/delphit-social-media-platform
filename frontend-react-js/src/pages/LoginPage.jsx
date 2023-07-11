@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { url } from '../utilis';
 import axios from 'axios';
-
+import { useDispatch } from 'react-redux';
 function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const schema = yup.object().shape({
     email: yup.string().email().required('Email is required'),
     password: yup.string().required('Password is required')
@@ -17,15 +19,20 @@ function LoginPage() {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const response = await axios.post('http://localhost:8081/auth/login', data);
-      console.log(response.data); 
-      navigate('/');
-    } catch (error) {
+   axios.post(`${url}/auth/login`, data)
+      // console.log(response.data); 
+        .then(({data}) => {
+          console.log(data);
+          if(data.token){
+           localStorage.setItem('token', data.token);
+            navigate('/');
+          }
+        })
+     .catch((error) => {
       alert(error.response.data.message)
       console.log('Error:', error);
     
-    }
+    });
   };
 
   return (

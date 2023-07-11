@@ -11,11 +11,10 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE likes (
-  likeID INT,
+  likeID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
   postID INT,
   like_date DATE,
-  PRIMARY KEY (likeID),
   CONSTRAINT FK_likes_userID
   FOREIGN KEY (userID)
   REFERENCES Users(userID)  ON DELETE CASCADE
@@ -24,26 +23,24 @@ CREATE TABLE likes (
 
 
 CREATE TABLE post (
-  postID INT,
+  postID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
   content VARCHAR(500),
   postImg VARCHAR(256),
   post_date DATE,
-  likes INT,
-  comments VARCHAR(500),
-  PRIMARY KEY (postID),
+  likesCount INT,
+  comments VARCHAR(500), 
   CONSTRAINT FK_post_userID
     FOREIGN KEY (userID)
     REFERENCES Users(userID)  ON DELETE CASCADE
 );
 
 CREATE TABLE message (
-  messageID INT,
+  messageID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
   receiverID INT,
   message_date DATE,
   contents VARCHAR(500),
-  PRIMARY KEY (messageID),
   CONSTRAINT FK_message_userID
     FOREIGN KEY (userID)
     REFERENCES Users(userID)  ON DELETE CASCADE
@@ -52,20 +49,19 @@ CREATE TABLE message (
 
 
 CREATE TABLE friendship (
-  friendship_id INT,
+  friendship_id INT PRIMARY KEY IDENTITY(1,1),
   user1ID INT,
   user2ID INT,
   friendship_date DATE,
-  PRIMARY KEY (friendship_id)
+ 
 );
 
 CREATE TABLE comment (
-  commentID INT,
+  commentID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
   postID INT,
   comment_date DATE,
-  content VARCHAR(500),
-  PRIMARY KEY (commentID),
+  content VARCHAR(500), 
   CONSTRAINT FK_comment_userID
     FOREIGN KEY (userID)
     REFERENCES Users(userID),
@@ -73,5 +69,4 @@ CREATE TABLE comment (
     FOREIGN KEY (postID)
     REFERENCES post(postID)  ON DELETE CASCADE
 );
-
 

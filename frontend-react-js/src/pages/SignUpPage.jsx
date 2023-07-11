@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
-
+import AvatarUpload from "../components/AvatarUpload";
+import { url } from "../utilis";
 function SignUpPage() {
   const navigate = useNavigate();
   const schema = yup.object().shape({
@@ -27,8 +28,8 @@ function SignUpPage() {
         alert("Passwords must match");
         return;
       }
-      const response = await axios.post(
-        "http://localhost:8081/auth/register",
+      const response = await axios.post(`${url}/auth/register`
+        ,
         requestData
       );
       if (response.data.error) {
@@ -65,6 +66,7 @@ function SignUpPage() {
             Already have an account? <a href="/signin">Login</a>
           </p>
         </form>
+        <AvatarUpload />
       </div>
     </div>
   );
