@@ -1,23 +1,24 @@
 import React from 'react';
-import FriendItem from '../components/FriendItem';
 import './FriendsPage.css';
 import Avatar from '../components/Avatar';
 
+
 function FriendsPage() {
+
   const friends = [
     {
       id: 1,
-      name: 'John Doe',
+      name: 'omuya',
       avatar: <Avatar />,
       status: 'Online',
     },
     {
       id: 2,
-      name: 'Jane Smith',
+      name: 'oluoch',
       avatar: <Avatar />,
       status: 'Offline',
     },
-    // Add more friend objects as needed
+    
   ];
 
   return (
@@ -28,6 +29,7 @@ function FriendsPage() {
           <FriendItem key={friend.id} friend={friend} />
         ))}
       </ul>
+      
     </div>
   );
 }

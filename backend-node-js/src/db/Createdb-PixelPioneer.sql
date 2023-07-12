@@ -10,7 +10,7 @@ CREATE TABLE Users(
 
 );
 
-CREATE TABLE likes (
+CREATE TABLE Likes (
   likeID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
   postID INT,
@@ -22,7 +22,7 @@ CREATE TABLE likes (
 
 
 
-CREATE TABLE post (
+CREATE TABLE Posts (
   postID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
   content VARCHAR(500),
@@ -35,19 +35,15 @@ CREATE TABLE post (
     REFERENCES Users(userID)  ON DELETE CASCADE
 );
 
-CREATE TABLE message (
-  messageID INT PRIMARY KEY IDENTITY(1,1),
-  userID INT,
-  receiverID INT,
-  message_date DATE,
-  contents VARCHAR(500),
-  CONSTRAINT FK_message_userID
-    FOREIGN KEY (userID)
-    REFERENCES Users(userID)  ON DELETE CASCADE
+CREATE TABLE Messages (
+  messageID INT PRIMARY KEY IDENTITY(1, 1),
+  room VARCHAR(255) NOT NULL,
+  authorID INT NOT NULL,
+  message TEXT NOT NULL,
+  time VARCHAR(20) NOT NULL,
+  created_at DATETIME DEFAULT GETDATE(),
+  FOREIGN KEY (authorID) REFERENCES Users (userID) ON DELETE CASCADE
 );
-
-
-
 CREATE TABLE friendship (
   friendship_id INT PRIMARY KEY IDENTITY(1,1),
   user1ID INT,
@@ -56,7 +52,7 @@ CREATE TABLE friendship (
  
 );
 
-CREATE TABLE comment (
+CREATE TABLE Comments (
   commentID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
   postID INT,
