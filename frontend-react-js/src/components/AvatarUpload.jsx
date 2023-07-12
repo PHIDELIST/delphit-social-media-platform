@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { presurl } from '../utilis';
-
+import { useSelector } from 'react-redux';
 export default function ProfileForm() {
+  const avatarname = useSelector(state => state.user.userID);
   const s3upload = async () => {
     const inputElement = document.querySelector('input[name="avatarupload"]');
     const file = inputElement.files[0];
-    const userID = 'data'; 
+    const userID = `${avatarname}`; 
 
     if (file) {
       const extension = file.name.split('.').pop();
