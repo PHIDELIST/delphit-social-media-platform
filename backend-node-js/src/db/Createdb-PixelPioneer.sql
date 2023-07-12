@@ -25,7 +25,7 @@ CREATE TABLE Likes (
 CREATE TABLE Posts (
   postID INT PRIMARY KEY IDENTITY(1,1),
   userID INT,
-  content VARCHAR(500),
+  content VARCHAR(1000),
   postImg VARCHAR(256),
   post_date DATE,
   likesCount INT,
@@ -38,13 +38,13 @@ CREATE TABLE Posts (
 CREATE TABLE Messages (
   messageID INT PRIMARY KEY IDENTITY(1, 1),
   room VARCHAR(255) NOT NULL,
-  authorID INT NOT NULL,
+  author VARCHAR(255) NOT NULL,
   message TEXT NOT NULL,
   time VARCHAR(20) NOT NULL,
   created_at DATETIME DEFAULT GETDATE(),
-  FOREIGN KEY (authorID) REFERENCES Users (userID) ON DELETE CASCADE
+  
 );
-CREATE TABLE friendship (
+CREATE TABLE Friendship (
   friendship_id INT PRIMARY KEY IDENTITY(1,1),
   user1ID INT,
   user2ID INT,
@@ -63,6 +63,6 @@ CREATE TABLE Comments (
     REFERENCES Users(userID),
   CONSTRAINT FK_comment_postId
     FOREIGN KEY (postID)
-    REFERENCES post(postID)  ON DELETE CASCADE
+    REFERENCES Posts(postID)  ON DELETE CASCADE
 );
 

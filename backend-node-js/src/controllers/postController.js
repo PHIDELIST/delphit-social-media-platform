@@ -10,7 +10,7 @@ export const createPost = async (req, res) => {
     .input('content',sql.VarChar,content)
     .input('postImg',sql.VarChar,postImg)
     
-    .query('INSERT INTO post (userID,content,postImg) VALUES (@userID,@content,@postImg)')
+    .query('INSERT INTO Posts (userID,content,postImg) VALUES (@userID,@content,@postImg)')
     res.json({message:'Post created successfuly'})
   }catch(err){
     console.log(err)
@@ -20,4 +20,16 @@ export const createPost = async (req, res) => {
 }
     
   
- 
+//get all posts
+export const getAllPosts = async (req, res) => {
+  try{
+    const pool = await sql.connect(config.sql)
+    const posts = await pool.request().query('SELECT * FROM Posts')
+    res.json(posts.recordset)
+  }catch(err){
+    console.log(err)
+  }finally{
+    sql.close()
+  }
+
+}

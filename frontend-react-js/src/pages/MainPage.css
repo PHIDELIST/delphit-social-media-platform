@@ -4,6 +4,7 @@
   }
   #pages{
     width: 80%;
+    min-height: 98vh;
   }
   #NavRight{
     width: 25%;

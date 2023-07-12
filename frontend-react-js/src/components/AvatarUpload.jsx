@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { presurl } from '../utilis';
+
 export default function ProfileForm() {
   const s3upload = async () => {
     const inputElement = document.querySelector('input[name="avatarupload"]');
@@ -25,7 +26,12 @@ export default function ProfileForm() {
 
           try {
             console.log(file)
-            const uploadResponse = await axios.put(presignedurl, file,);
+            const uploadResponse = await axios.put(presignedurl,file, {
+              method: "PUT",
+              body: file,
+              headers: {
+                'Content-Type': "application/octet-stream",
+            }});
 
             if (uploadResponse.status === 200) {
               console.log('Upload successful');

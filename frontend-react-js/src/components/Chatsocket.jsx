@@ -1,74 +1,75 @@
-import {useEffect,useState } from "react"
-import './Chatsocket.css'
-import { login } from "../redux/userSlice";
-export default function Chatsocket({socket,username,room}){
-const [messageList,setMessageList] =useState([]);
-const [currentMessage, setCurrentMessage] = useState("");
-    
-const sendMessage = async () => {
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./Chatsocket.css";
+
+export default function Chatsocket({ socket, username, room }) {
+  const [messageList, setMessageList] = useState([]);
+  const [currentMessage, setCurrentMessage] = useState("");
+
+  const sendMessage = async () => {
     if (currentMessage !== "") {
-        const messageData = {
-            room: room,
-            author: username,
-            message: currentMessage,
-            time:
-                new Date(Date.now()).getHours() +
-                ":" +
-                new Date(Date.now()).getMinutes(),
-        };
+      const messageData = {
+        room: room,
+        author: username,
+        message: currentMessage,
+        time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+      };
 
-        await socket.emit("send_message", messageData);  // send_message is the event name
-        setMessageList((list) => [...list, messageData]);   // add the message to the list
-        setCurrentMessage("");   // clear the input field
+      try {
+        const response = await axios.post("http://localhost:8081/messages", messageData);
+        if (response.status === 200) {
+          setMessageList((list) => [...list, messageData]);
+          setCurrentMessage("");
+          console.log("Message sent successfully");
+        } else {
+          console.error("Failed to send message:", response.status);
+        }
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
     }
-};
+  };
 
-useEffect(() => {
-    socket.on("receive_message", (data) => {     // receive_message is the event name
-        setMessageList((list) => [...list, data]);   // data is the message data
-        console.log(messageList)
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      setMessageList((list) => [...list, data]);
+      console.log(messageList);
     });
-}, [socket]);
+  }, [socket]);
 
-return (
+  return (
     <div className="chat-window">
-
-        <div className="chat-body">
-            < div className="message-container">
-                {messageList.map((messageContent, index) => {
-                    return (
-                        <div
-                            className="message" key={index}
-                            id={username === messageContent.author ? "you" : "other"}
-                        >
-                            <div>
-                                <div className="message-content">
-                                    <p>{messageContent.message}</p>
-                                </div>
-                                <div className="message-meta">
-                                    <p id="time">{messageContent.time}</p>
-                                    <p id="author">{messageContent.author}</p>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+      <div className="chat-body">
+        <div className="message-container">
+          {messageList.map((messageContent, index) => (
+            <div
+              className="message"
+              key={index}
+              id={username === messageContent.author ? "you" : "other"}
+            >
+              <div>
+                <div className="message-content">
+                  <p>{messageContent.message}</p>
+                </div>
+                <div className="message-meta">
+                  <p id="time">{messageContent.time}</p>
+                  <p id="author">{messageContent.author}</p>
+                </div>
+              </div>
             </div>
+          ))}
         </div>
-        <div className="chat-footer">
-            <input
-                type="text"
-                value={currentMessage}
-                placeholder="Hey..."
-                onChange={(event) => {
-                    setCurrentMessage(event.target.value);
-                }}
-                onKeyPress={(event) => {
-                    event.key === "Enter" && sendMessage();
-                }}
-            />
-            <button onClick={sendMessage}>&#9658;</button>
-        </div>
+      </div>
+      <div className="chat-footer">
+        <input
+          type="text"
+          value={currentMessage}
+          placeholder="Hey..."
+          onChange={(event) => setCurrentMessage(event.target.value)}
+          onKeyPress={(event) => event.key === "Enter" && sendMessage()}
+        />
+        <button onClick={sendMessage}>&#9658;</button>
+      </div>
     </div>
-);
+  );
 }
