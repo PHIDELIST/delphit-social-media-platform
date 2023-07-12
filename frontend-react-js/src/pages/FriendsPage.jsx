@@ -1,7 +1,7 @@
 import React from 'react';
 import './FriendsPage.css';
 import Avatar from '../components/Avatar';
-
+import FriendItem from '../components/FriendItem';
 
 function FriendsPage() {
 
