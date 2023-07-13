@@ -42,7 +42,7 @@ export default function ProfileForm() {
     <button onClick={handleProfile}>&larr; Back</button>
     <div className="profile-form">
       
-      {/* <input
+      <input
         type="file"
         name="avatarupload"
         onChange={handleAvatarChange}
@@ -53,7 +53,7 @@ export default function ProfileForm() {
         ) : (
           <img src={placeholderImage} alt="Placeholder" />
         )}
-      </div> */}
+      </div>
       <AvatarUpload />
       <textarea
         value={bio}

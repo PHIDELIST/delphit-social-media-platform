@@ -9,7 +9,7 @@ import * as sns from 'aws-cdk-lib/aws-sns';
 import { config } from 'process';
 import * as dotenv from 'dotenv';
 
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+
 //load env variables
 
 dotenv.config();

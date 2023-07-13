@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import './PostCreationPage.css';
 import placeholder from '../assets/placeholder.jpg';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { homeUI } from "../redux/uiSlice";
 import axios from 'axios';
-import { url } from '../utilis';
-import { useSelector } from 'react-redux';
+import { url, presurl_posts } from '../utilis';
+
 function PostCreationPage() {
   const token = useSelector((state) => state.user.token);
   const [content, setContent] = useState('');
   const [postImg, setPostImg] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [updatedPostImg, setUpdatedPostImg] = useState(null);
   const dispatch = useDispatch();
+
   const handleTextChange = (event) => {
     setContent(event.target.value);
   };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setPostImg(file);
@@ -29,27 +32,66 @@ function PostCreationPage() {
       setPreviewImage(null);
     }
   };
+
   const handleProfile = () => {
     dispatch(homeUI("profile"));
   };
+
   const handlePost = async () => {
     console.log('content:', content);
     console.log('Image:', postImg);
-    const postData = {
-      content,
-      image: postImg,
-    };
-  console.log(postData);
-    try {   
-      // Send the posts to the backend
-      await axios.post(`${url}/posts`, postData, {
+    const postData = new FormData();
+    postData.append('content', content);
+    postData.append('postImg', postImg);
+
+    try {
+      const response = await axios.post(`${url}/posts`, postData, {
         headers: {
-          'Content-Type': 'application/json',
-          'authorization':token,
+          'Content-Type': 'multipart/form-data',
+          authorization: token,
         },
-      }
-      );
+      });
       console.log('Post submitted successfully');
+      const { updatedPostImg } = response.data;
+      console.log('Updated post image:', updatedPostImg);
+
+      // Set the updatedPostImg value in the state
+      setUpdatedPostImg(updatedPostImg);
+
+      // Upload the post image
+      if (postImg) {
+        const extension = postImg.name.split('.').pop();
+        const requestBody = {
+          updatedPostImg: updatedPostImg,
+          extension: extension,
+        };
+        try {
+          const response = await axios.post(presurl_posts, requestBody);
+          if (response.status === 200) {
+            
+            const presignedurl = response.data.url;
+            try {
+              const uploadResponse = await axios.put(presignedurl, postImg, {
+                headers: {
+                  'Content-Type': "application/octet-stream",
+                }
+              });
+              if (uploadResponse.status === 200) {
+                console.log('Upload successful');
+              } else {
+                console.log('Upload failed');
+              }
+            } catch (err) {
+              console.error('Error uploading image:', err);
+            }
+          } else {
+            console.error('Error getting presigned URL');
+          }
+        } catch (err) {
+          console.error('Error requesting presigned URL:', err);
+        }
+      }
+
       // Reset the input fields after post submission
       setContent('');
       setPostImg(null);
@@ -57,7 +99,8 @@ function PostCreationPage() {
     } catch (error) {
       console.error('Error submitting post:', error);
     }
-  };      
+  };
+
   return (
     <div className="post-container">
       <h2>Create a Post</h2>
@@ -66,7 +109,8 @@ function PostCreationPage() {
         <textarea
           value={content}
           onChange={handleTextChange}
-          placeholder="Enter your post text..."></textarea>
+          placeholder="Enter your post text..."
+        ></textarea>
         <div className="image-preview">
           {previewImage ? (
             <img src={previewImage} alt="Preview" />
