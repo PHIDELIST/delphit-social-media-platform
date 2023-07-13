@@ -1,6 +1,7 @@
 .sign-up-page{
     display: flex;
     flex-direction: column;
+    height: 100vh;
 
 }
 .sign-up-page-container{
@@ -21,9 +22,11 @@
 .signupform input{
     width: 300px;
     height: 40px;
+    border-radius: 5px;
 }
 .signupform button{
     width: 80px;
     height: 30px;
     background-color: #74ABF3;
+    border-radius: 5px;
 }

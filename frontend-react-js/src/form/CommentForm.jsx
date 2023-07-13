@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './CommentForm.css'
 function CommentForm({ onAddComment }) {
   const [comment, setComment] = useState('');
 
@@ -12,12 +12,11 @@ function CommentForm({ onAddComment }) {
   };
 
   return (
-    <form className="comment-form" onSubmit={handleSubmit}>
+    <form id="comment-form" onSubmit={handleSubmit}>
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        placeholder="Add a comment..."
-      ></textarea>
+        placeholder="Add a comment..."></textarea>
       <button type="submit">Submit</button>
     </form>
   );

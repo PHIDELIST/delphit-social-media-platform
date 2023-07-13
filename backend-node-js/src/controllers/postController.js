@@ -2,7 +2,9 @@ import sql from 'mssql'
 import config from '../db/config.js'
 
 export const createPost = async (req, res) => {
-    const {userID, content,postImg} = req.body
+    const {content,postImg } = req.body
+    const userID = req.user.userID;
+    
   try{
     const pool = await sql.connect(config.sql)
     await pool.request()

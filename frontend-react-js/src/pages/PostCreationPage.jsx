@@ -5,16 +5,16 @@ import { useDispatch } from "react-redux";
 import { homeUI } from "../redux/uiSlice";
 import axios from 'axios';
 import { url } from '../utilis';
+import { useSelector } from 'react-redux';
 function PostCreationPage() {
+  const token = useSelector((state) => state.user.token);
   const [content, setContent] = useState('');
   const [postImg, setPostImg] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const dispatch = useDispatch();
-
   const handleTextChange = (event) => {
     setContent(event.target.value);
   };
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setPostImg(file);
@@ -29,26 +29,27 @@ function PostCreationPage() {
       setPreviewImage(null);
     }
   };
-
   const handleProfile = () => {
     dispatch(homeUI("profile"));
   };
-
   const handlePost = async () => {
     console.log('content:', content);
     console.log('Image:', postImg);
-  
     const postData = {
       content,
       image: postImg,
     };
   console.log(postData);
-    try {
-      // Send the data to the backend
-      await axios.post(`${url}/post/postcreation`, postData);
-  
+    try {   
+      // Send the posts to the backend
+      await axios.post(`${url}/posts`, postData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization':token,
+        },
+      }
+      );
       console.log('Post submitted successfully');
-  
       // Reset the input fields after post submission
       setContent('');
       setPostImg(null);
@@ -56,11 +57,7 @@ function PostCreationPage() {
     } catch (error) {
       console.error('Error submitting post:', error);
     }
-  };
-  
-  
-
-  
+  };      
   return (
     <div className="post-container">
       <h2>Create a Post</h2>
@@ -69,8 +66,7 @@ function PostCreationPage() {
         <textarea
           value={content}
           onChange={handleTextChange}
-          placeholder="Enter your post text..."
-        ></textarea>
+          placeholder="Enter your post text..."></textarea>
         <div className="image-preview">
           {previewImage ? (
             <img src={previewImage} alt="Preview" />

@@ -1,30 +1,22 @@
 import axios from 'axios';
 import { presurl } from '../utilis';
 import { useSelector } from 'react-redux';
-export default function ProfileForm() {
+export default function AvatarUpload() {
   const avatarname = useSelector(state => state.user.userID);
   const s3upload = async () => {
     const inputElement = document.querySelector('input[name="avatarupload"]');
     const file = inputElement.files[0];
     const userID = `${avatarname}`; 
-
     if (file) {
       const extension = file.name.split('.').pop();
       const requestBody = {
         userID: userID,
         extension: extension,
       };
-
       try {
-        console.log('Requesting presigned URL...');
         const response = await axios.post(presurl, requestBody);
-
         if (response.status === 200) {
           const presignedurl = response.data.url;
-          console.log('Received presigned URL:', presignedurl);
-
-           
-
           try {
             console.log(file)
             const uploadResponse = await axios.put(presignedurl,file, {
@@ -33,26 +25,19 @@ export default function ProfileForm() {
               headers: {
                 'Content-Type': "application/octet-stream",
             }});
-
             if (uploadResponse.status === 200) {
               console.log('Upload successful');
-            } else {
-              console.log('Upload failed:', uploadResponse);
+            } else {  
             }
-          } catch (err) {
-            console.log('Error uploading file:', err);
+          } catch (err) {   
           }
-        } else {
-          console.log('Failed to get presigned URL:', response);
+        } else {       
         }
       } catch (err) {
-        console.log('Error requesting presigned URL:', err);
       }
     } else {
-      console.log('No file selected.');
     }
   };
-
   return (
     <div className="profile-form">
       <input type="file" name="avatarupload" />

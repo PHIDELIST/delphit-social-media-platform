@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
-import AvatarUpload from "../components/AvatarUpload";
+
 import { url } from "../utilis";
 function SignUpPage() {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ function SignUpPage() {
             Already have an account? <a href="/signin">Login</a>
           </p>
         </form>
-        <AvatarUpload />
+        
       </div>
     </div>
   );

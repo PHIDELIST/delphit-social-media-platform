@@ -29,7 +29,7 @@ CREATE TABLE Posts (
   postImg VARCHAR(256),
   post_date DATE,
   likesCount INT,
-  comments VARCHAR(500), 
+  repostCount INT, 
   CONSTRAINT FK_post_userID
     FOREIGN KEY (userID)
     REFERENCES Users(userID)  ON DELETE CASCADE
