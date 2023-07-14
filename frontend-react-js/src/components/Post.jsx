@@ -5,16 +5,13 @@ import './Post.css';
 import Comments from './Comments.jsx';
 import CommentForm from '../form/CommentForm.jsx';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function Post() {
+  const token = useSelector((state) => state.user.token);
   const username = 'phidel';
   const avatar = Avatar;
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  const [reposts, setReposts] = useState(0);
-  const [isReposted, setIsReposted] = useState(false);
   const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
@@ -35,10 +32,29 @@ function Post() {
     setShowComments(!showComments);
   };
 
-  const handleAddComment = (comment) => {
-    setComments([...comments, comment]);
+  const handleAddComment = async (postId, comment) => {
+    try {
+      const response = await axios.post(`http://localhost:8081/comments/${postId}`, {
+        content: comment,
+      },{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: token,
+        },
+      });
+      console.log('Comment added in the backend');
+  
+      // Update the comments in the local state
+      const updatedPosts = posts.map((post) =>
+        post.postID === postId ? { ...post, comments: response.data.comments } : post
+      );
+      setPosts(updatedPosts);
+    } catch (error) {
+      console.error('Error adding comment:', error);
+    }
   };
-
+  
+  
   const handleLike = async (postId) => {
     try {
       // Find the post by postId
@@ -54,7 +70,6 @@ function Post() {
       );
       setPosts(updatedPosts);
 
-     
       await axios.post(`http://localhost:8081/likesupdate/${postId}`, {
         isLiked: updatedPost.isLiked,
       });
@@ -125,7 +140,9 @@ function Post() {
           {showComments && (
             <div className="comment-form-container">
               {post.comments && post.comments.length > 0 && <hr />}
-              <CommentForm onAddComment={handleAddComment} />
+              <CommentForm postId={post.postID} onAddComment={handleAddComment} />
+
+
             </div>
           )}
         </div>

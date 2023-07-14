@@ -3,6 +3,7 @@ import { getMessages, storeMessage } from '../controllers/messageController.js'
 import { createPost, getAllPosts } from '../controllers/postController.js'
 import {updateLikes} from '../controllers/likesController.js'
 import {updateRepost} from '../controllers/repostController.js'
+import {createComment} from '../controllers/commentsController.js'
 const delphitsocialRoutes = (app) => {
     app.route('/auth/register')
         .post(register)
@@ -18,6 +19,8 @@ const delphitsocialRoutes = (app) => {
         .post(updateLikes);
     app.route('/reposts/:postId')
         .post(updateRepost)
+    app.route('/comments/:postId')
+        .post(loginrequired,createComment)
       
 }
 
