@@ -16,17 +16,21 @@ export default function Chatsocket({ socket, username, room }) {
       };
 
       try {
+        // Send message to the HTTP server
         const response = await axios.post("http://localhost:8081/messages", messageData);
         if (response.status === 200) {
           setMessageList((list) => [...list, messageData]);
           setCurrentMessage("");
-          console.log("Message sent successfully");
+          console.log("Message sent  successfully");
         } else {
-          console.error("Failed to send message:", response.status);
+          console.error("Failed to send message to HTTP server:", response.status);
         }
       } catch (error) {
-        console.error("Error sending message:", error);
+        console.error("Error sending message to HTTP server:", error);
       }
+
+      // Emit message to the socket server
+      socket.emit("send_message", messageData);
     }
   };
 
