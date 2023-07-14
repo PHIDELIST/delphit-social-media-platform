@@ -4,23 +4,17 @@ import Welcome from '../assets/Welcome.jpg';
 import Avatar from '../assets/Avatar.jpg'; 
 import {useDispatch} from "react-redux"
 import {homeUI} from "../redux/uiSlice";
-// import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-// const navigate = useNavigate();
-
-// const createpost = () => {
-//   navigate('/createpost');
-
-// }
+  const username = useSelector((state) => state.user.user);
+  const useremail = useSelector((state) => state.user.email);
 const handleCreatepost= () => {
   dispatch(homeUI("createpost"));
 };
 
-// const editprofile =() => {
-//   navigate('/editprofile');
-// }
+
 const handleEditprofile= () => {
   dispatch(homeUI("editprofile"));
 };
@@ -28,7 +22,7 @@ const handleEditprofile= () => {
   return (
     <>
       <div id='profilepage-main'>
-      <h6>@delphino</h6>
+      <h6>@{username}</h6>
         <div className="card">
           <div className="card__img">
             <img src={Welcome} alt="avatar background" />
@@ -37,16 +31,16 @@ const handleEditprofile= () => {
                 <img  src={Avatar} alt="Avatar" />
             </div>
           <div className="email-editprofile">
-            <h6>Email: delphino@gmail.com</h6>
+            <h6>Email: {useremail}</h6>
             <button onClick={handleEditprofile}id='logout'> Edit Profile</button>
           </div>
           
           <div className='bio'>
-            <h5>About Me</h5>
+            <h5>About {username}</h5>
             <p> I am a full stack cloud developer with a particular interest in making things simple and automating daily tasks. I try to keep up with security and best practices, and am always looking for new things to learn. </p>
           </div>
           <div className="post-logout">
-           <button onClick={handleCreatepost}>Create Post</button>
+           <button id='logout' onClick={handleCreatepost}>Create Post</button>
             <button id='logout'> Logout</button>
           </div>
           

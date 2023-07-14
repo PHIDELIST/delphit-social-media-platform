@@ -1,15 +1,28 @@
 #landing-page{
     display: flex;
     flex-direction: row;
+    width: 100%;
+    gap: 1.8rem;
   }
   #pages{
-    width: 80%;
+   
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     min-height: 98vh;
+   
+   
   }
   #NavRight{
     width: 25%;
+    padding: 0;
+   
+    
     
   }
   #NavLeft{
     width: 15%;
+    padding: 0;
+    
+    
   }

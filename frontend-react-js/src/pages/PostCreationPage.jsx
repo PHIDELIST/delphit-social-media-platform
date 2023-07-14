@@ -104,7 +104,7 @@ function PostCreationPage() {
   return (
     <div className="post-container">
       <h2>Create a Post</h2>
-      <button onClick={handleProfile}>&larr; Back</button>
+      <button onClick={handleProfile}>&larr;</button>
       <div className="post-form">
         <textarea
           value={content}

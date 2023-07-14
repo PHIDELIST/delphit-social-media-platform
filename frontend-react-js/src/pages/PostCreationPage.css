@@ -2,7 +2,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #F5F7F9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
@@ -51,6 +51,19 @@
   }
   
   .input-file-label:hover {
+    background-color: #094c8d;
+  }
+  .post-container button {
+    background-color: #0a66c2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .post-container button:hover {
     background-color: #094c8d;
   }
   

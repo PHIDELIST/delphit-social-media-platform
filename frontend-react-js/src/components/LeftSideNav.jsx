@@ -1,21 +1,17 @@
 import Logo from "../assets/Logo.png";
 import "./LeftSideNav.css";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { Sidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
 import Avatar from "../components/Avatar";
 import { FaBars, FaHome, FaBell, FaComments, FaUserFriends, FaUser,} from "react-icons/fa";
 import {useDispatch} from "react-redux"
 import {homeUI} from "../redux/uiSlice";
-
-
-
+import { useSelector } from "react-redux";
 function LeftSideNav() {
+  const username =  useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
-  const [showNavButtons, setShowNavButtons] = useState(true);
-  const toggleNavButtons = () => {
-    setShowNavButtons(!showNavButtons);
-  };
+
   const handleHome = ()=> {
     dispatch(homeUI("home"));
   };
@@ -32,39 +28,34 @@ function LeftSideNav() {
     dispatch(homeUI("profile"));
   };
 
-  
+ const [collapsed, setCollapsed] = useState(false);
+ const handleWindowResize = () => {
+  setCollapsed(window.innerWidth < 768);
+ 
+ }
+ useEffect(() => {
+  handleWindowResize();
+  window.addEventListener("resize", handleWindowResize);
+  return () => {
+   window.removeEventListener("resize", handleWindowResize);
+  };
+ 
+},[])
   return (
-    <>
-      <div id="leftSideNav" className={showNavButtons ? "" : "compressed"}>
-        <img id="logo" src={Logo} alt="logo" />
-        <div
-          id="leftnav-btns"
-          className={showNavButtons ? "show" : "hide"}
-        >
-          <button id="leftnav-btn" onClick={handleHome}>
-            <FaHome size={32} id="icons" /> <span>Home</span>
-          </button>
-          <button id="leftnav-btn" onClick={handleNotifications}>
-            <FaBell size={32} id="icons" /> <span>Notifications</span>
-          </button>
-          <button id="leftnav-btn" onClick={handleChats}>
-            <FaComments size={32} id="icons" /><span>Chats</span>
-          </button>
-          <button id="leftnav-btn" onClick={handleFriends}>
-            <FaUserFriends size={32} id="icons" /><span>Friends</span>
-          </button>
-          <button id="leftnav-btn" onClick={handleProfile}>
-            <FaUser size={32} id="icons" /><span>Profile</span>
-          </button>
-        </div>
-        <div id="leftnav-avatar">
-          <Avatar /> @delphino
-        </div>
-        <div id="toggle-btn" onClick={toggleNavButtons}>
-          <FaBars size={24} />
-        </div>
-      </div>
-    </>
+  
+      <Sidebar id="leftSideNav" collapsed={collapsed}   className="sidebar"style={{ height: "100vh"}}>
+        <Menu>
+          
+        <MenuItem icon={<FaBars />} onClick={() => {   setCollapsed(!collapsed); }} style={{ textAlign: "center" }} > {" "}<img id="logo" src={Logo} alt="logo" /></MenuItem>
+          
+        <MenuItem id="leftnav-btn" icon={<FaHome size={32}  id="icons" />}onClick={handleHome}>Home</MenuItem>
+         <MenuItem id="leftnav-btn" icon={<FaBell size={32} id="icons" />}onClick={handleNotifications}>Notifications</MenuItem>
+          <MenuItem id="leftnav-btn" icon={<FaComments size={32} id="icons"  />} onClick={handleChats}>Chats</MenuItem>
+          <MenuItem id="leftnav-btn" icon={<FaUserFriends size={32} id="icons"  />} onClick={handleFriends}>Friends</MenuItem>
+         <MenuItem id="leftnav-btn" icon={ <Avatar /> }onClick={handleProfile}>@{username}</MenuItem>        
+      
+      </Menu>
+      </Sidebar>      
   );
 }
 

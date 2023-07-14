@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import placeholderImage from "../assets/placeholder.jpg";
 import './EditProfilePage.css'
-import {useDispatch} from "react-redux"
-import {homeUI} from "../redux/uiSlice";
-import AvatarUpload from "../components/AvatarUpload";
+import { useDispatch, useSelector } from "react-redux";
+import { homeUI } from "../redux/uiSlice";
+import axios from 'axios';
+import { presurl } from '../utilis';
 
 export default function ProfileForm() {
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [previewAvatar, setPreviewAvatar] = useState(null);
   const dispatch = useDispatch();
+  const avatarname = useSelector(state => state.user.userID);
+
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
+
   const handleProfile = () => {
     dispatch(homeUI("profile"));
   };
+
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     setAvatar(file);
@@ -31,37 +36,76 @@ export default function ProfileForm() {
     }
   };
 
-  const handleUpdateProfile = () => {
-    
+  const handleUpdateProfile = async () => {
     console.log("Bio:", bio);
     console.log("Avatar:", avatar);
+
+    const inputElement = document.querySelector('input[name="avatarupload"]');
+    const file = inputElement.files[0];
+    const userID = `${avatarname}`;
+
+    if (file) {
+      const extension = file.name.split('.').pop();
+      const requestBody = {
+        userID: userID,
+        extension: extension,
+      };
+
+      try {
+        const response = await axios.post(presurl, requestBody);
+        if (response.status === 200) {
+          const presignedurl = response.data.url;
+          try {
+            console.log(file)
+            const uploadResponse = await axios.put(presignedurl, file, {
+              method: "PUT",
+              body: file,
+              headers: {
+                'Content-Type': "application/octet-stream",
+              }
+            });
+            if (uploadResponse.status === 200) {
+              console.log('Upload successful');
+            } else {
+              // Handle upload failure
+            }
+          } catch (err) {
+            // Handle upload error
+          }
+        } else {
+          // Handle response error
+        }
+      } catch (err) {
+        // Handle API request error
+      }
+    } else {
+      // Handle no file selected
+    }
   };
 
   return (
     <>
-    <button onClick={handleProfile}>&larr; Back</button>
-    <div className="profile-form">
-      
-      <input
-        type="file"
-        name="avatarupload"
-        onChange={handleAvatarChange}
-      />
-      <div className="avatar-preview">
-        {previewAvatar ? (
-          <img src={previewAvatar} alt="Preview" />
-        ) : (
-          <img src={placeholderImage} alt="Placeholder" />
-        )}
+      <button onClick={handleProfile}>&larr;</button>
+      <div className="profile-form">
+        <input
+          type="file"
+          name="avatarupload"
+          onChange={handleAvatarChange}
+        />
+        <div className="avatar-preview">
+          {previewAvatar ? (
+            <img src={previewAvatar} alt="Preview" />
+          ) : (
+            <img src={placeholderImage} alt="Placeholder" />
+          )}
+        </div>
+        <textarea
+          value={bio}
+          onChange={handleBioChange}
+          placeholder="Enter your bio..."
+        ></textarea>
+        <button onClick={handleUpdateProfile}>Update Profile</button>
       </div>
-      <AvatarUpload />
-      <textarea
-        value={bio}
-        onChange={handleBioChange}
-        placeholder="Enter your bio..."
-      ></textarea>
-      <button onClick={handleUpdateProfile}>Update Profile</button>
-    </div>
     </>
   );
 }

@@ -25,37 +25,36 @@ function MainPage (){
         {
             ui =='profile' ? (
                 <div id='mainpage_wrapper'>
-                    <h3>Profile page</h3>
                     <ProfilePage />
                     </div>
             ): ui == 'home' ? (
                 <div id='mainpage_wrapper'>
-                <h3>Home Page</h3>
+                
                 <HomePage />
                 </div>
             ): ui == 'notifications' ? (
                 <div id='mainpage_wrapper'>
-                <h3>Notification</h3>
+                
                 <NotificationsPage />
                 </div>
             ): ui == 'chats' ? (
                 <div id='mainpage_wrapper'>
-                <h3>Chats</h3>
+                
                 <Chat />
                 </div>
             ): ui == 'friends' ? (
                 <div id='mainpage_wrapper'>
-                <h3>Friends</h3>
+                
                 <FriendsPage />
                 </div>
              ): ui == 'editprofile' ? (
                 <div id='mainpage_wrapper'>
-                <h3>edit</h3>
+                
                 <EditProfilePage />
                 </div>
              ): ui == 'createpost' ? (
                 <div id='mainpage_wrapper'>
-                <h3>edit</h3>
+               
                 <PostCreationPage />
                 </div>
              ): ui == 'search' ? (
