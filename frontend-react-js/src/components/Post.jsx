@@ -54,7 +54,7 @@ function Post() {
       );
       setPosts(updatedPosts);
 
-      // Make an API request to update the likes count in the backend
+     
       await axios.post(`http://localhost:8081/likesupdate/${postId}`, {
         isLiked: updatedPost.isLiked,
       });
@@ -79,7 +79,6 @@ function Post() {
       );
       setPosts(updatedPosts);
 
-      // Make an API request to update the reposts count in the backend
       await axios.post(`http://localhost:8081/reposts/${postId}`, {
         isReposted: updatedPost.isReposted,
       });
