@@ -4,7 +4,7 @@ import config from '../db/config.js'
 export const createPost = async (req, res) => {
   const { content, postImg } = req.body;
   const userID = req.user.userID;
-
+console.log(content, postImg, userID);
   try {
     const pool = await sql.connect(config.sql);
     const request = pool.request();

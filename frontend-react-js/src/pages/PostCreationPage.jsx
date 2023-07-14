@@ -32,7 +32,6 @@ function PostCreationPage() {
       setPreviewImage(null);
     }
   };
-
   const handleProfile = () => {
     dispatch(homeUI("profile"));
   };
@@ -40,10 +39,15 @@ function PostCreationPage() {
   const handlePost = async () => {
     console.log('content:', content);
     console.log('Image:', postImg);
-    const postData = new FormData();
-    postData.append('content', content);
-    postData.append('postImg', postImg);
-
+  
+    const postData = {
+      content: content,
+      postImg: postImg ? postImg.name : null,
+    };
+    
+  
+    console.log('postData:', postData);
+  
     try {
       const response = await axios.post(`${url}/posts`, postData, {
         headers: {
@@ -51,6 +55,7 @@ function PostCreationPage() {
           authorization: token,
         },
       });
+  console.log(postData);
       console.log('Post submitted successfully');
       const { updatedPostImg } = response.data;
       console.log('Updated post image:', updatedPostImg);
@@ -106,11 +111,7 @@ function PostCreationPage() {
       <h2>Create a Post</h2>
       <button onClick={handleProfile}>&larr;</button>
       <div className="post-form">
-        <textarea
-          value={content}
-          onChange={handleTextChange}
-          placeholder="Enter your post text..."
-        ></textarea>
+        <textarea value={content} onChange={handleTextChange} placeholder="Enter your post text..."></textarea>
         <div className="image-preview">
           {previewImage ? (
             <img src={previewImage} alt="Preview" />

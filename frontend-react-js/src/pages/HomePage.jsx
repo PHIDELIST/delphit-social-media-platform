@@ -7,9 +7,7 @@ export default function HomePage() {
     <div id='Home-Page'>
     
     <Post/>
-    <Post/>
-    <Post/>
-    <Post/>
+   
     </div>
     </>
   )

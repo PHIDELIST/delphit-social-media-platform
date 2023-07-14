@@ -28,9 +28,7 @@ function SignUpPage() {
         alert("Passwords must match");
         return;
       }
-      const response = await axios.post(`${url}/auth/register`
-        ,
-        requestData
+      const response = await axios.post(`${url}/auth/register`, requestData
       );
       if (response.data.error) {
         alert("User already exists"); 
