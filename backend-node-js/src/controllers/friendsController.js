@@ -1,29 +1,32 @@
 import sql from 'mssql';
 import config from '../db/config.js';
 
+
+
 export const getFriends = async (req, res) => {
-    const userID = req.user.userID;
-  
-    try {
-      const pool = await sql.connect(config.sql);
-      const query = `
-        SELECT Friendship.friendship_id, Users.userID, Users.name, Users.avatarID
-        FROM Users
-        INNER JOIN Friendship ON (Users.userID = Friendship.user2ID)
-        WHERE Friendship.user1ID = @userID
-      `;
-      const result = await pool
-        .request()
-        .input('userID', sql.Int, userID)
-        .query(query);
-  
-      const friends = result.recordset;
-      res.json(friends);
-    } catch (error) {
-      console.error('Error fetching friends:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  };
+  const userID = req.user.userID;
+
+  try {
+    const pool = await sql.connect(config.sql);
+    const query = `
+      SELECT Friendship.friendship_id, Users.userID, Users.name, Users.avatarID
+      FROM Users
+      INNER JOIN Friendship ON (Users.userID = Friendship.user2ID OR Users.userID = Friendship.user1ID)
+      WHERE Friendship.user1ID = @userID OR Friendship.user2ID = @userID
+    `;
+    const result = await pool
+      .request()
+      .input('userID', sql.Int, userID)
+      .query(query);
+
+    const friends = result.recordset;
+    res.json(friends);
+  } catch (error) {
+    console.error('Error fetching friends:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
   
   
   export const deleteFriendship = async (req, res) => {
