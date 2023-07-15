@@ -38,7 +38,7 @@ export const storeMessage = async (req, res) => {
       const result = await pool.request().query(query);
       const messages = result.recordset;
   
-      // Create chat objects with necessary information
+      // Create chat objects 
       const chats = messages.map((message) => ({
         id: message.room.split('-')[1],
         name: message.name,
