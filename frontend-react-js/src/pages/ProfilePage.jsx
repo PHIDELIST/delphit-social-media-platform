@@ -1,7 +1,7 @@
 
 import './ProfilePage.css';
 import Welcome from '../assets/Welcome.jpg';
-import Avatar from '../assets/Avatar.jpg'; 
+import Avatar from '../components/Avatar';
 import {useDispatch} from "react-redux"
 import {homeUI} from "../redux/uiSlice";
 import { useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ const handleEditprofile= () => {
             <img src={Welcome} alt="avatar background" />
           </div>
             <div className="card__avatar">
-                <img  src={Avatar} alt="Avatar" />
+                <Avatar />
             </div>
           <div className="email-editprofile">
             <h6>Email: {useremail}</h6>

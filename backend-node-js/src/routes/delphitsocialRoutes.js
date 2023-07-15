@@ -4,6 +4,8 @@ import { createPost, getAllPosts } from '../controllers/postController.js'
 import {updateLikes} from '../controllers/likesController.js'
 import {updateRepost} from '../controllers/repostController.js'
 import {createComment} from '../controllers/commentsController.js'
+import {getUsers,followUser} from '../controllers/usersController.js'
+import {getFriends,deleteFriendship} from '../controllers/friendsController.js'
 const delphitsocialRoutes = (app) => {
     app.route('/auth/register')
         .post(register)
@@ -21,6 +23,21 @@ const delphitsocialRoutes = (app) => {
         .post(updateRepost)
     app.route('/comments/:postId')
         .post(loginrequired,createComment)
+
+    app.route('/users')
+        .get(getUsers)
+        
+    app.route('/follow/:userID')
+        .post(loginrequired,followUser)
+    app.route('/friends')
+        .get(loginrequired,getFriends)
+        
+    app.route('/unfollow/:friendship_id')
+        .delete(deleteFriendship)
+    // app.route('/unfollow/:userId')
+    //     .post(loginrequired,followUser)
+    // app.route('/profile/:userId')
+    //     .get(loginrequired,getUsers)')
       
 }
 

@@ -9,8 +9,6 @@ import { useSelector } from 'react-redux';
 
 function Post() {
   const token = useSelector((state) => state.user.token);
-  const username = 'phidel';
-  const avatar = Avatar;
   const [posts, setPosts] = useState([]);
   const [showComments, setShowComments] = useState(false);
 
@@ -18,7 +16,11 @@ function Post() {
     const fetchPosts = async () => {
       try {
         const response = await axios.get('http://localhost:8081/posts');
-        const fetchedPosts = response.data;
+        const fetchedPosts = response.data.map((post) => ({
+          ...post,
+          username: post.username, // Replace 'username' with the actual field name from the backend response
+          avatar: post.avatarID, // Replace 'avatarID' with the actual field name from the backend response
+        }));
         setPosts(fetchedPosts);
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -108,12 +110,17 @@ function Post() {
       {posts.map((post) => (
         <div className="post" key={post.postID}>
           <div className="post-header">
-            <img src={avatar} alt="Avatar" className="post-avatar" />
-            <h4>@{username}</h4>
+            <img src={post.avatar} alt="Avatar" className="post-avatar" />
+            <h4>@{post.username}</h4>
           </div>
           <div className="post-content">
-            <p>{post.content}</p>
-            <img src={post.postImg} alt="Post" className="post-image" />
+            {post.postImg ? (
+              <p>{post.content}</p>
+              
+            ) : (<>
+              <p>{post.content}</p>
+              <img src={post.postImg} alt="Post" className="post-image" /></>
+            )}
           </div>
           <div className="post-actions">
             <div className="like-action" onClick={() => handleLike(post.postID)}>

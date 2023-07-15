@@ -37,22 +37,15 @@
   
   .card__avatar {
     position: absolute;
-    width: 150px;
-    height: 150px;
+    /* width: 150px;
+    height: 150px; */
     background: var(--bg-color);
     border-radius: 100%;
     display: flex;
     top: calc(45% - 57px);
     margin-left: 3rem;
   }
-  
-  .card__avatar img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-   
-   
-  }
+ 
   
   .card__title {
     margin-top: 60px;

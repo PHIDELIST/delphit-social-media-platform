@@ -43,14 +43,22 @@ console.log(updatedPostImg);
   
 //get all posts
 export const getAllPosts = async (req, res) => {
-  try{
-    const pool = await sql.connect(config.sql)
-    const posts = await pool.request().query('SELECT * FROM Posts')
-    res.json(posts.recordset)
-  }catch(err){
-    console.log(err)
-  }finally{
-    sql.close()
-  }
+  try {
+    const pool = await sql.connect(config.sql);
+    const result = await pool
+      .request()
+      .query(
+        `SELECT Posts.*, Users.name AS username, Users.avatarID 
+         FROM Posts
+         INNER JOIN Users ON Posts.userID = Users.userID`
+      );
 
-}
+    const posts = result.recordset;
+    res.json(posts);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'An error occurred while retrieving posts.' });
+  } finally {
+    sql.close();
+  }
+};
