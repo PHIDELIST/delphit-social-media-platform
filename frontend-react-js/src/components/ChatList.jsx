@@ -1,30 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ChatList.css';
 import Avatar from './Avatar.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../redux/friendsSlice';
+import axios from 'axios';
 
 function ChatList({ onSelectChat }) {
   const dispatch = useDispatch();
   const yourUserId = useSelector((state) => state.user.userID);
+  const yourUserName = useSelector((state) => state.user.name);
+  const token = useSelector((state) => state.user.token);
+  const [chats, setChats] = useState([]);
 
-  const chats = [
-    {
-      id: 1,
-      name: 'phidel',
-      avatar: 'path/to/avatar1.jpg',
-      lastMessage: 'Hello there!',
-      unreadCount: 0,
-    },
-    {
-      id: 2,
-      name: 'delphino',
-      avatar: 'path/to/avatar1.jpg',
-      lastMessage: 'Hello there!',
-      unreadCount: 2,
-    },
+  useEffect(() => {
+    const fetchChats = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/messages', {
+          headers: {
+            Authorization: token,
+          },
+        });
+        const fetchedChats = response.data;
     
-  ];
+        setChats(fetchedChats);
+      } catch (error) {
+        console.error('Error fetching chats:', error);
+      }
+    };
+
+
+    fetchChats();
+  }, []);
 
   const handleChatClick = (chat) => {
     const roomId = yourUserId + '-' + chat.id;
@@ -35,18 +41,15 @@ function ChatList({ onSelectChat }) {
   return (
     <div className="chat-list-container">
       <ul className="chat-list">
-        {chats.map((chat) => (
-          <li key={chat.id} onClick={() => handleChatClick(chat)}>
+        {chats.map((chat, index) => (
+          <li key={index} onClick={() => handleChatClick(chat)}>
             <div className="chat-item">
               <div className="chat-item-avatar">
                 @{chat.name}
-                <Avatar />
+                <Avatar avatarID={chat.avatarID} />
               </div>
               <div className="chat-item-info">
-                <p>{chat.lastMessage}</p>
-                {chat.unreadCount > 0 && (
-                  <div className="unread-count">{chat.unreadCount}</div>
-                )}
+                <p>{chat.lastMessage.message}</p>
               </div>
             </div>
           </li>
@@ -54,6 +57,9 @@ function ChatList({ onSelectChat }) {
       </ul>
     </div>
   );
+  
+  
+  
 }
 
 export default ChatList;

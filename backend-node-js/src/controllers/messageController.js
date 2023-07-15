@@ -22,18 +22,36 @@ export const storeMessage = async (req, res) => {
   };
 
   //get messages for a specific room
-  export const getMessages = async (req, res) => {
-    const { room } = req.params;
+ 
+  export const getChats = async (req, res) => {
     try {
       const pool = await sql.connect(config.sql);
-      const result = await pool.request()
-        .input('room', sql.NVarChar, room)
-        .query('SELECT message FROM Messages WHERE room = @room');
-      res.json(result.recordset);
+  
+      // Fetch all chat data from Messages table
+      const query = `
+        SELECT M.room, M.author, M.message, M.time, U.name, U.avatarID
+        FROM Messages M
+        INNER JOIN Users U ON M.author = U.name
+        ORDER BY M.created_at DESC
+      `;
+  
+      const result = await pool.request().query(query);
+      const messages = result.recordset;
+  
+      // Create chat objects with necessary information
+      const chats = messages.map((message) => ({
+        id: message.room.split('-')[1],
+        name: message.name,
+        avatarID: message.avatarID,
+        lastMessage: {
+          message: message.message,
+          timestamp: message.time,
+        },
+      }));
+  
+      res.json(chats);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: 'An error occurred while retrieving the messages' });
-    } finally {
-      sql.close();
+      console.error('Error fetching chats:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-  }
+  };

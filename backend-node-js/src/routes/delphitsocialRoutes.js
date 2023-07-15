@@ -1,5 +1,5 @@
 import {register,login ,loginrequired} from '../controllers/authController.js'
-import { getMessages, storeMessage } from '../controllers/messageController.js'
+import { getChats, storeMessage } from '../controllers/messageController.js'
 import { createPost, getAllPosts } from '../controllers/postController.js'
 import {updateLikes} from '../controllers/likesController.js'
 import {updateRepost} from '../controllers/repostController.js'
@@ -16,7 +16,7 @@ const delphitsocialRoutes = (app) => {
         .get(getAllPosts)
     app.route('/messages')
         .post(storeMessage)
-        .get(getMessages)
+        .get(loginrequired,getChats)
     app.route('/likesupdate/:postId')
         .post(updateLikes);
     app.route('/reposts/:postId')
