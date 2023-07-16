@@ -3,9 +3,9 @@ import "./SignUpPage.css";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
-
+import { Auth } from 'aws-amplify'; 
 import { url } from "../utilis";
+
 function SignUpPage() {
   const navigate = useNavigate();
   const schema = yup.object().shape({
@@ -28,17 +28,22 @@ function SignUpPage() {
         alert("Passwords must match");
         return;
       }
-      const response = await axios.post(`${url}/auth/register`, requestData
-      );
-      if (response.data.error) {
-        alert("User already exists"); 
-      } else {
-        alert("Registration successful");
-        navigate("/signin");
-      }
+
+      // AWS Cognito Auth.signUp method 
+      await Auth.signUp({
+        username: requestData.email, // Use the email as the username
+        password: requestData.password,
+        attributes: {
+          name: requestData.name,
+          email: requestData.email,
+        },
+      });
+
+      alert("Registration successful");
+      // Navigate to ConfirmationPage and pass the email as a URL parameter
+      navigate(`/confirm?email=${requestData.email}`);
     } catch (error) {
-      alert("error occured while registering");
-      
+      alert("Error occurred while registering: " + error.message);
     }
   };
 
@@ -64,7 +69,6 @@ function SignUpPage() {
             Already have an account? <a href="/signin">Login</a>
           </p>
         </form>
-        
       </div>
     </div>
   );

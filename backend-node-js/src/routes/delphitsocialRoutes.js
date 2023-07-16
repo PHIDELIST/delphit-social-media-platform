@@ -13,7 +13,7 @@ const delphitsocialRoutes = (app) => {
         .post(login)
     app.route('/posts')
         .post(loginrequired,createPost)
-        .get(getAllPosts)
+        .get(loginrequired,getAllPosts)
     app.route('/messages')
         .post(storeMessage)
         .get(loginrequired,getChats)

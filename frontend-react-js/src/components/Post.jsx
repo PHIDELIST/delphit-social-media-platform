@@ -15,11 +15,15 @@ function Post() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/posts');
+        const response = await axios.get('http://localhost:8081/posts',{
+          headers: {
+            authorization: token,
+          },
+        });
         const fetchedPosts = response.data.map((post) => ({
           ...post,
-          username: post.username, // Replace 'username' with the actual field name from the backend response
-          avatar: post.avatarID, // Replace 'avatarID' with the actual field name from the backend response
+          username: post.username, 
+          avatar: post.avatarID, 
         }));
         setPosts(fetchedPosts);
       } catch (error) {

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-  const username = useSelector((state) => state.user.user);
+  const username = useSelector((state) => state.user.name);
   const useremail = useSelector((state) => state.user.email);
 const handleCreatepost= () => {
   dispatch(homeUI("createpost"));

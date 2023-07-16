@@ -1,10 +1,9 @@
 create database delphit;
 
 CREATE TABLE Users(
-  userID INT PRIMARY KEY IDENTITY(1,1),
+  userID NVARCHAR(500) PRIMARY KEY,
   name VARCHAR(256),
   email VARCHAR(256),
-  password VARCHAR(256),
   avatarID VARCHAR (256),
   bio VARCHAR(500)
 
@@ -12,7 +11,7 @@ CREATE TABLE Users(
 
 CREATE TABLE Likes (
   likeID INT PRIMARY KEY IDENTITY(1,1),
-  userID INT,
+  userID NVARCHAR(500),
   postID INT,
   like_date DATE,
   CONSTRAINT FK_likes_userID
@@ -20,11 +19,9 @@ CREATE TABLE Likes (
   REFERENCES Users(userID)  ON DELETE CASCADE
 );
 
-
-
 CREATE TABLE Posts (
   postID INT PRIMARY KEY IDENTITY(1,1),
-  userID INT,
+  userID NVARCHAR(500),
   content VARCHAR(1000),
   postImg VARCHAR(256),
   post_date DATE,
@@ -46,15 +43,15 @@ CREATE TABLE Messages (
 );
 CREATE TABLE Friendship (
   friendship_id INT PRIMARY KEY IDENTITY(1,1),
-  user1ID INT,
-  user2ID INT,
+  user1ID NVARCHAR(500),
+  user2ID NVARCHAR(500),
   friendship_date DATE,
  
 );
 
 CREATE TABLE Comments (
   commentID INT PRIMARY KEY IDENTITY(1,1),
-  userID INT,
+  userID NVARCHAR(500),
   postID INT,
   comment_date DATE,
   content VARCHAR(500), 
