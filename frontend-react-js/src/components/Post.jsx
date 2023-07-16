@@ -17,7 +17,7 @@ function Post() {
       try {
         const response = await axios.get('http://localhost:8081/posts',{
           headers: {
-            authorization: token,
+            authorization:token,
           },
         });
         const fetchedPosts = response.data.map((post) => ({

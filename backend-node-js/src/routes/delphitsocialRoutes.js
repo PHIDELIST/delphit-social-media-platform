@@ -6,6 +6,7 @@ import {updateRepost} from '../controllers/repostController.js'
 import {createComment} from '../controllers/commentsController.js'
 import {getUsers,followUser} from '../controllers/usersController.js'
 import {getFriends,deleteFriendship} from '../controllers/friendsController.js'
+import {authorizeMiddleware} from '../middlewares/authorizeMiddleware.js'
 const delphitsocialRoutes = (app) => {
     app.route('/auth/register')
         .post(register)
@@ -13,7 +14,7 @@ const delphitsocialRoutes = (app) => {
         .post(login)
     app.route('/posts')
         .post(loginrequired,createPost)
-        .get(loginrequired,getAllPosts)
+        .get(authorizeMiddleware,getAllPosts)
     app.route('/messages')
         .post(storeMessage)
         .get(loginrequired,getChats)

@@ -14,6 +14,8 @@
   "author": "phidelist oluoch",
   "license": "ISC",
   "dependencies": {
+    "aws-amplify": "^5.3.4",
+    "aws-jwt-verify": "^4.0.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
