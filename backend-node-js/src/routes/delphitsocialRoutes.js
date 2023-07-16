@@ -1,4 +1,3 @@
-import {register,login ,loginrequired} from '../controllers/authController.js'
 import { getChats, storeMessage } from '../controllers/messageController.js'
 import { createPost, getAllPosts } from '../controllers/postController.js'
 import {updateLikes} from '../controllers/likesController.js'
@@ -8,30 +7,26 @@ import {getUsers,followUser} from '../controllers/usersController.js'
 import {getFriends,deleteFriendship} from '../controllers/friendsController.js'
 import {authorizeMiddleware} from '../middlewares/authorizeMiddleware.js'
 const delphitsocialRoutes = (app) => {
-    app.route('/auth/register')
-        .post(register)
-    app.route('/auth/login')
-        .post(login)
     app.route('/posts')
-        .post(loginrequired,createPost)
+        .post(authorizeMiddleware,createPost)
         .get(authorizeMiddleware,getAllPosts)
     app.route('/messages')
         .post(storeMessage)
-        .get(loginrequired,getChats)
+        .get(authorizeMiddleware,getChats)
     app.route('/likesupdate/:postId')
         .post(updateLikes);
     app.route('/reposts/:postId')
         .post(updateRepost)
     app.route('/comments/:postId')
-        .post(loginrequired,createComment)
+        .post(authorizeMiddleware,createComment)
 
     app.route('/users')
         .get(getUsers)
         
     app.route('/follow/:userID')
-        .post(loginrequired,followUser)
+        .post(authorizeMiddleware,followUser)
     app.route('/friends')
-        .get(loginrequired,getFriends)
+        .get(authorizeMiddleware,getFriends)
         
     app.route('/unfollow/:friendship_id')
         .delete(deleteFriendship)
