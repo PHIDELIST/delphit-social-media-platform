@@ -16,7 +16,7 @@ export const getFriends = async (req, res) => {
     `;
     const result = await pool
       .request()
-      .input('userID', sql.Int, userID)
+      .input('userID', sql.NVarChar, userID)
       .query(query);
 
     const friends = result.recordset;
@@ -35,7 +35,7 @@ export const getFriends = async (req, res) => {
     try {
       const pool = await sql.connect(config.sql);
       const query = `DELETE FROM Friendship WHERE friendship_id = @friendshipId`;
-      await pool.request().input('friendshipId', sql.Int, friendshipId).query(query);
+      await pool.request().input('friendshipId', sql.NVarChar, friendshipId).query(query);
   
       res.status(200).json({ message: 'Friendship deleted successfully' });
     } catch (error) {

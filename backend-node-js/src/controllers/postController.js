@@ -9,7 +9,7 @@ console.log(content, postImg, userID);
     const pool = await sql.connect(config.sql);
     const request = pool.request();
 
-    request.input('userID', sql.Int, userID);
+    request.input('userID', sql.NVarChar, userID);
     request.input('content', sql.VarChar, content);
     request.input('postImg', sql.VarChar, postImg);
 

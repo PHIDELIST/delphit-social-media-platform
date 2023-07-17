@@ -12,7 +12,7 @@ export default function ProfileForm() {
   const [previewAvatar, setPreviewAvatar] = useState(null);
   const dispatch = useDispatch();
   const avatarname = useSelector(state => state.user.userID);
-
+  const token = useSelector(state => state.user.token);
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
@@ -44,6 +44,7 @@ export default function ProfileForm() {
     const file = inputElement.files[0];
     const userID = `${avatarname}`;
 
+    // Update avatar in S3
     if (file) {
       const extension = file.name.split('.').pop();
       const requestBody = {
@@ -81,28 +82,41 @@ export default function ProfileForm() {
     } else {
       // Handle no file selected
     }
+
+    // Update bio in the backend
+    try {
+      const bioResponse = await axios.post("http://localhost:8081/updateprofile", {
+        bio: bio, // Include the bio in the request body
+      },{
+        headers:{
+          authorization:token
+        }
+      });
+
+      if (bioResponse.status === 200) {
+        console.log('Bio update successful');
+      } else {
+        // Handle response error
+      }
+    } catch (err) {
+      // Handle API request error
+    }
   };
 
   return (
     <>
       <button onClick={handleProfile}>&larr;</button>
       <div className="profile-form">
-        <input
-          type="file"
-          name="avatarupload"
-          onChange={handleAvatarChange}
-        />
         <div className="avatar-preview">
           {previewAvatar ? (
             <img src={previewAvatar} alt="Preview" />
           ) : (
             <img src={placeholderImage} alt="Placeholder" />
           )}
+          
         </div>
-        <textarea
-          value={bio}
-          onChange={handleBioChange}
-          placeholder="Enter your bio..."
+        <input type="file" name="avatarupload" onChange={handleAvatarChange}/>
+        <textarea value={bio} onChange={handleBioChange} placeholder="Enter your bio..."
         ></textarea>
         <button onClick={handleUpdateProfile}>Update Profile</button>
       </div>

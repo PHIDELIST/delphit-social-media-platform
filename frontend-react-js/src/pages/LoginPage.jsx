@@ -1,5 +1,6 @@
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../assets/logo.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -42,6 +43,9 @@ function LoginPage() {
 
   return (
     <div className="LoginPage">
+       <div className="recover-info">
+       <img src={Logo} alt="" />
+      </div>
       <h1>Sign into your account</h1>
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
         <input type="email" placeholder="Email" {...register('email')} />

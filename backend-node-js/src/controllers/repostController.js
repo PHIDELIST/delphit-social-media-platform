@@ -41,7 +41,7 @@ export const updateRepost = async (req, res) => {
   
         // Insert the reposted post into the database
         const insertResult = await request
-          .input('repostedUserID', sql.Int, repostedPost.userID)
+          .input('repostedUserID', sql.NVarChar, repostedPost.userID)
           .input('repostedContent', sql.VarChar(1000), repostedPost.content)
           .input('repostedPostImg', sql.VarChar(256), repostedPost.postImg)
           .input('repostedPostDate', sql.Date, repostedPost.post_date)

@@ -25,8 +25,8 @@ export const followUser = async (req, res) => {
     // Check if the follow relationship already exists
     const checkQuery = `SELECT friendship_id FROM Friendship WHERE user1ID = @followerID AND user2ID = @userID`;
     const checkResult = await pool.request()
-      .input('followerID', sql.Int, followerID)
-      .input('userID', sql.Int, userID)
+      .input('followerID', sql.NVarChar, followerID)
+      .input('userID', sql.NVarChar, userID)
       .query(checkQuery);
 
     if (checkResult.recordset.length > 0) {
@@ -36,8 +36,8 @@ export const followUser = async (req, res) => {
     // Create the follow relationship
     const insertQuery = `INSERT INTO Friendship (user1ID, user2ID, friendship_date) VALUES (@followerID, @userID, GETDATE())`;
     const insertResult = await pool.request()
-      .input('followerID', sql.Int, followerID)
-      .input('userID', sql.Int, userID)
+      .input('followerID', sql.NVarChar, followerID)
+      .input('userID', sql.NVarChar, userID)
       .query(insertQuery);
 
     res.status(200).json({ message: 'Follow request sent successfully' });

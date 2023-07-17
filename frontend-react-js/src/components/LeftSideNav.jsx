@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux"
 import {homeUI} from "../redux/uiSlice";
 import { useSelector } from "react-redux";
 function LeftSideNav() {
-  const username =  useSelector((state) => state.user.user);
+  const username =  useSelector((state) => state.user.name);
   const dispatch = useDispatch();
 
 

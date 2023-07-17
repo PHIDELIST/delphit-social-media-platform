@@ -6,7 +6,12 @@ import {createComment} from '../controllers/commentsController.js'
 import {getUsers,followUser} from '../controllers/usersController.js'
 import {getFriends,deleteFriendship} from '../controllers/friendsController.js'
 import {authorizeMiddleware} from '../middlewares/authorizeMiddleware.js'
+import { updateprofile,getbio} from '../controllers/profileController.js'
 const delphitsocialRoutes = (app) => {
+    app.route('/updateprofile')
+        .post(authorizeMiddleware,updateprofile)
+        .get(authorizeMiddleware,getbio)
+
     app.route('/posts')
         .post(authorizeMiddleware,createPost)
         .get(authorizeMiddleware,getAllPosts)
@@ -30,10 +35,7 @@ const delphitsocialRoutes = (app) => {
         
     app.route('/unfollow/:friendship_id')
         .delete(deleteFriendship)
-    // app.route('/unfollow/:userId')
-    //     .post(loginrequired,followUser)
-    // app.route('/profile/:userId')
-    //     .get(loginrequired,getUsers)')
+    
       
 }
 

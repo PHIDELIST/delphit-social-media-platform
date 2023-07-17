@@ -19,7 +19,7 @@
   }
   
   .recover-wrapper {
-    background-color: #ffffff;
+    background-color: #F5F7F9;;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -71,6 +71,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    padding-bottom: 5px;
     outline: none;
     transition: background-color 0.3s ease;
   }

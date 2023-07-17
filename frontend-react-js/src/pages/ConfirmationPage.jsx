@@ -67,10 +67,11 @@ const navigate = useNavigate();
 
   return (
     <article className="confirm-article">
+      
+      <div className="recover-wrapper">
       <div className="recover-info">
        <img src={Logo} alt="" />
       </div>
-      <div className="recover-wrapper">
         <form className="confirm_form" onSubmit={onsubmit}>
           <h2>Confirm your Email</h2>
           <div className="fields">

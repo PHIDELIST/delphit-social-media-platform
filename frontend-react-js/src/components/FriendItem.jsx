@@ -25,7 +25,7 @@ function FriendItem({ friend }) {
         @{name}
       </div>
       <div className="friend-info">
-        <button onClick={handleDeleteFriendship}>Delete</button>
+        <button onClick={handleDeleteFriendship}>Unfollow</button>
       </div>
     </li>
   );

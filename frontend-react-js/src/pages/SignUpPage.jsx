@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import "./SignUpPage.css";
 import { useNavigate } from "react-router-dom";
+import Logo from '../assets/Logo.png'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Auth } from 'aws-amplify'; 
@@ -49,6 +50,9 @@ function SignUpPage() {
 
   return (
     <div className="sign-up-page">
+       <div className="recover-info">
+       <img src={Logo} alt="" />
+      </div>
       <div className="sign-up-page-container">
         <h1>Sign Up</h1>
         <form className="signupform" onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +68,7 @@ function SignUpPage() {
             {...register("confirmPassword")}
           />
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-          <button type="submit">Sign Up</button>
+          <button  type="submit">Sign Up</button>
           <p>
             Already have an account? <a href="/signin">Login</a>
           </p>

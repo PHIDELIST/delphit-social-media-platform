@@ -29,7 +29,7 @@ export const createComment = async (req, res) => {
   
       // Insert the comment into the database
       const result = await request
-  .input('userID', sql.Int, newComment.userID)
+  .input('userID', sql.NVarChar, newComment.userID)
   .input('comment_date', sql.DateTime2, newComment.comment_date)
   .input('content', sql.VarChar(500), newComment.content)
   .query('INSERT INTO Comments (userID, postID, comment_date, content) OUTPUT inserted.commentID VALUES (@userID, @postId, @comment_date, @content)');
