@@ -32,6 +32,7 @@ function PostCreationPage() {
       setPreviewImage(null);
     }
   };
+
   const handleProfile = () => {
     dispatch(homeUI("profile"));
   };
@@ -42,20 +43,18 @@ function PostCreationPage() {
   
     const postData = {
       content: content,
-      postImg: postImg ? postImg.name : null,
     };
-    
-  
+
     console.log('postData:', postData);
   
     try {
       const response = await axios.post(`${url}/posts`, postData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           authorization: token,
         },
       });
-  console.log(postData);
+
       console.log('Post submitted successfully');
       const { updatedPostImg } = response.data;
       console.log('Updated post image:', updatedPostImg);
@@ -73,10 +72,9 @@ function PostCreationPage() {
         try {
           const response = await axios.post(presurl_posts, requestBody);
           if (response.status === 200) {
-            
-            const presignedurl = response.data.url;
+            const presignedposturl = response.data.url;
             try {
-              const uploadResponse = await axios.put(presignedurl, postImg, {
+              const uploadResponse = await axios.put(presignedposturl, postImg, {
                 headers: {
                   'Content-Type': "application/octet-stream",
                 }
