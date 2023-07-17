@@ -6,6 +6,8 @@ import Comments from './Comments.jsx';
 import CommentForm from '../form/CommentForm.jsx';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import {postimgurl,avatarurl} from '../utilis.js'
+
 
 function Post() {
   const token = useSelector((state) => state.user.token);
@@ -26,6 +28,7 @@ function Post() {
           avatar: post.avatarID, 
         }));
         setPosts(fetchedPosts);
+        
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -114,16 +117,19 @@ function Post() {
       {posts.map((post) => (
         <div className="post" key={post.postID}>
           <div className="post-header">
-            <img src={post.avatar} alt="Avatar" className="post-avatar" />
+            <img id='post-avatar' src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
             <h4>@{post.username}</h4>
           </div>
           <div className="post-content">
-            {post.postImg ? (
-              <p>{post.content}</p>
-              
+            {!post.postImg ? (
+              <p>{post.content}</p>      
             ) : (<>
               <p>{post.content}</p>
-              <img src={post.postImg} alt="Post" className="post-image" /></>
+              
+              <img className="displayImg" src={`${postimgurl}/${post.postImg}.jpeg`} alt="post" />
+              {/* <img src={post.postImg} alt="Post" className="post-image" /> */}
+
+              </>
             )}
           </div>
           <div className="post-actions">
