@@ -22,16 +22,20 @@ function FriendItem({ friend }) {
 
   return (
     <li className="friend-item">
+      <div id="friend-container-header">
       <div className="friend-avatar">
+      @{name}
         <Avatar avatarID={avatarID} />
-        @{name}
       </div>
-      <div className="friend-info">
+      <div className="friend-btns">
         <button onClick={handleDeleteFriendship}>Unfollow</button>
         <button onClick={() => setShowChat(!showChat)}>Chat</button>
+       </div>
+       </div>
+       <div className="chat-container"> 
         {showChat && (
           <Chatsocket
-            username={username} // Replace with the actual username
+            username={username} 
             room={friendship_id}
           />
         )}

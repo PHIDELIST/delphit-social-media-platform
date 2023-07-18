@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import {avatarurl} from '../utilis.js'
+import Trends from './Trends';
 
 
 function RightSideNav() {
@@ -11,6 +12,7 @@ function RightSideNav() {
   const token = useSelector((state) => state.user.token);
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [trends, setTrends] = useState([]);
 
   const handleSignIn = () => {
     navigate('/signin');
@@ -49,11 +51,12 @@ function RightSideNav() {
     fetchUsers();
   }, []);
 
+
   return (
     <div id='rightSideNav'>
       {user ? (
         <div id='trends'>
-          <h6>Trending</h6>
+          <Trends />
         </div>
       ) : (
         <div id='signin-signup'>

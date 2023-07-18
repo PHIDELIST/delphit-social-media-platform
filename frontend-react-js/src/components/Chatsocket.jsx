@@ -64,11 +64,7 @@ function Chatsocket({ username, room }) {
       <div className="chat-body">
         <div className="message-container">
           {messageList.map((messageContent, index) => (
-            <div
-              className="message"
-              key={index}
-              id={username === messageContent.author ? 'you' : 'other'}
-            >
+            <div className="message" key={index} id={username === messageContent.author ? 'you' : 'other'}>
               <div>
                 <div className="message-content">
                   <p>{messageContent.message}</p>
@@ -83,14 +79,7 @@ function Chatsocket({ username, room }) {
         </div>
       </div>
       <div className="chat-footer">
-        <input
-          type="text"
-          value={currentMessage}
-          placeholder="Delphit..."
-          onChange={(event) => setCurrentMessage(event.target.value)}
-          onKeyPress={(event) => event.key === 'Enter' && sendMessage()}
-          ref={inputRef} // Add ref to the input field
-        />
+        <input type="textarea" value={currentMessage} placeholder="Delphit..." onChange={(event) => setCurrentMessage(event.target.value)} onKeyPress={(event) => event.key === 'Enter' && sendMessage()} ref={inputRef} />
         <button onClick={sendMessage}>&#9658;</button>
       </div>
     </div>

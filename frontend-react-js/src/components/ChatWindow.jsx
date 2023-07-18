@@ -5,7 +5,7 @@ import { FaPaperPlane } from 'react-icons/fa';
 import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 
-function ChatWindow({ chat, onBack }) {
+function ChatWindow({ chat, onBack}) {
   const [showChat, setShowChat] = useState(false);
   const [socket, setSocket] = useState(null);
 
@@ -13,7 +13,7 @@ function ChatWindow({ chat, onBack }) {
   const storedUserId = useSelector ((state) => state.user.userID)
   const selectedUserId = useSelector((state) => state.friends.selectedUser);
   // const room = `${storedUserId}-${selectedUserId}`;
-  const room = `${Math.min(storedUserId, selectedUserId)}-${Math.max(storedUserId, selectedUserId)}`;
+
 
 
   useEffect(() => {

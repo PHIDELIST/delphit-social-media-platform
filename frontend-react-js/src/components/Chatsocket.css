@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    
   }
   
   .chat-body {
@@ -45,7 +46,12 @@
     display: flex;
     align-items: center;
     padding: 10px;
+    gap: 10px;
     background-color: #F3F6F8;
+    border-radius: 8px;
+  }
+  .chat-footer input{
+    width: 100%;
   }
   
   .chat-footer input[type="text"] {
@@ -103,6 +109,7 @@
   .message#you {
     align-self: flex-end;
     background-color: #F3F6F8;
+    width: fit-content;
     
   }
   

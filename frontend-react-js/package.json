@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "aws-amplify": "^5.3.4",
     "axios": "^1.4.0",
+    "emoji-picker-react": "^4.4.10",
     "fa-icons": "^0.2.0",
     "jsonwebtoken": "^9.0.1",
     "react": "^18.2.0",

@@ -1,16 +1,31 @@
-.friend-item{
-    display: flex;
-    flex-direction: row;
-    gap: 5rem;
-    padding: 15px;
-    align-items: center;
-    /* justify-content: center; */
-    background-color: #EFF1F3;
-    border-bottom: 1px solid gainsboro;
-    margin: 10px;
+
+.friend-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  padding: 15px;
+  
+  background-color: #EFF1F3;
+  border-bottom: 1px solid gainsboro;
+  margin: 10px;
 }
-.friend-avatar{
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+#friend-container-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
 }
+
+.friend-avatar {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.friend-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
