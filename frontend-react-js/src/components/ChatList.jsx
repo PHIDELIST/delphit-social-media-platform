@@ -37,6 +37,7 @@ function ChatList({ onSelectChat }) {
     dispatch(setSelectedUser(chat.id));
     onSelectChat(chat, roomId);
   };
+  
 
   return (
     <div className="chat-list-container">
@@ -47,6 +48,7 @@ function ChatList({ onSelectChat }) {
               <div className="chat-item-avatar">
                 @{chat.name}
                 <Avatar avatarID={chat.avatarID} />
+               
               </div>
               <div className="chat-item-info">
                 <p>{chat.lastMessage.message}</p>

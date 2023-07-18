@@ -9,6 +9,7 @@ import {homeUI} from "../redux/uiSlice";
 import { useSelector } from "react-redux";
 function LeftSideNav() {
   const username =  useSelector((state) => state.user.name);
+  const avatarID = useSelector((state) => state.user.userID);
   const dispatch = useDispatch();
 
 
@@ -52,7 +53,7 @@ function LeftSideNav() {
          <MenuItem id="leftnav-btn" icon={<FaBell size={32} id="icons" />}onClick={handleNotifications}>Notifications</MenuItem>
           <MenuItem id="leftnav-btn" icon={<FaComments size={32} id="icons"  />} onClick={handleChats}>Chats</MenuItem>
           <MenuItem id="leftnav-btn" icon={<FaUserFriends size={32} id="icons"  />} onClick={handleFriends}>Friends</MenuItem>
-         <MenuItem id="leftnav-btn" icon={ <Avatar /> }onClick={handleProfile}>@{username}</MenuItem>        
+         <MenuItem id="leftnav-btn" icon={ <Avatar avatarID={avatarID }/> }onClick={handleProfile}>@{username}</MenuItem>        
       
       </Menu>
       </Sidebar>      

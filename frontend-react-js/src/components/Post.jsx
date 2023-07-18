@@ -43,9 +43,8 @@ function Post() {
 
   const handleAddComment = async (postId, comment) => {
     try {
-      const response = await axios.post(`http://localhost:8081/comments/${postId}`, {
-        content: comment,
-      },{
+      const response = await axios.post(`http://localhost:8081/comments/${postId}`, comment
+      ,{
         headers: {
           'Content-Type': 'multipart/form-data',
           authorization: token,

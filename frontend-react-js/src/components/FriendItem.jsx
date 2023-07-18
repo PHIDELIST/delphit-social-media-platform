@@ -26,6 +26,7 @@ function FriendItem({ friend }) {
       <div className="friend-avatar">
       @{name}
         <Avatar avatarID={avatarID} />
+      
       </div>
       <div className="friend-btns">
         <button onClick={handleDeleteFriendship}>Unfollow</button>

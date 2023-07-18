@@ -5,13 +5,16 @@ import Avatar from '../components/Avatar';
 import { useDispatch } from "react-redux";
 import { homeUI } from "../redux/uiSlice";
 import { useSelector } from 'react-redux';
-import axios from 'axios'; // Import axios for API requests
-
+import { logout } from "../redux/userSlice";
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios'; 
 export default function ProfilePage() {
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const username = useSelector((state) => state.user.name);
   const useremail = useSelector((state) => state.user.email);
   const token = useSelector((state) => state.user.token);
+  const avatarID = useSelector((state) => state.user.userID);
   const [bio, setBio] = useState("");
 
   const handleCreatepost = () => {
@@ -40,7 +43,10 @@ export default function ProfilePage() {
 
     fetchBio(); // Call the fetchBio function
   }, [token]);
-
+  const handlelogout = () => {
+      dispatch(logout());
+      navigate('/signin');
+  }
   return (
     <>
       <div id='profilepage-main'>
@@ -50,7 +56,7 @@ export default function ProfilePage() {
             <img src={Welcome} alt="avatar background" />
           </div>
           <div className="card__avatar">
-            <Avatar />
+            <Avatar avatarID={avatarID} />
           </div>
           <div className="email-editprofile">
             <h6>Email: {useremail}</h6>
@@ -62,7 +68,7 @@ export default function ProfilePage() {
           </div>
           <div className="post-logout">
             <button id='logout' onClick={handleCreatepost}>Create Post</button>
-            <button id='logout'> Logout</button>
+            <button id='logout' onClick={handlelogout}><i className="fas fa-sign-out-alt"></i> Logout</button>
           </div>
         </div>
       </div>

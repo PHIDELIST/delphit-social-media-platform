@@ -9,6 +9,7 @@ CREATE TABLE Users(
 
 );
 
+
 CREATE TABLE Likes (
   likeID INT PRIMARY KEY IDENTITY(1,1),
   userID NVARCHAR(500),
