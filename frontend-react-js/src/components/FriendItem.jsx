@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FriendItem.css';
 import Avatar from './Avatar';
 import axios from 'axios';
-
+import Chatsocket from './Chatsocket'; // Import the Chatsocket component
+import { useSelector } from 'react-redux';
 function FriendItem({ friend }) {
   const { friendship_id, name, avatarID } = friend;
-
+  const [showChat, setShowChat] = useState(false); // State variable to toggle chat display
+  const username = useSelector(state => state.user.name)
   const handleDeleteFriendship = async () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this friendship?');
     if (confirmDelete) {
@@ -17,7 +19,7 @@ function FriendItem({ friend }) {
       }
     }
   };
-  
+
   return (
     <li className="friend-item">
       <div className="friend-avatar">
@@ -26,6 +28,13 @@ function FriendItem({ friend }) {
       </div>
       <div className="friend-info">
         <button onClick={handleDeleteFriendship}>Unfollow</button>
+        <button onClick={() => setShowChat(!showChat)}>Chat</button>
+        {showChat && (
+          <Chatsocket
+            username={username} // Replace with the actual username
+            room={friendship_id}
+          />
+        )}
       </div>
     </li>
   );
