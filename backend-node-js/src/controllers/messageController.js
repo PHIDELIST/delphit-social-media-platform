@@ -6,7 +6,7 @@ export const storeMessage = async (req, res) => {
     try {
       const pool = await sql.connect(config.sql);
       await pool.request()
-        .input('room', sql.NVarChar, room)
+        .input('room', sql.Int, room)
         .input('author', sql.NVarChar, author)
         .input('message', sql.NVarChar, message)
         .input('time', sql.NVarChar, time)
@@ -40,7 +40,7 @@ export const storeMessage = async (req, res) => {
   
       // Create chat objects 
       const chats = messages.map((message) => ({
-        id: message.room.split('-')[1],
+        id: message.room,
         name: message.name,
         avatarID: message.avatarID,
         lastMessage: {

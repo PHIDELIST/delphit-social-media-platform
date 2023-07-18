@@ -37,7 +37,19 @@ function Chatsocket({ username, room }) {
         message: currentMessage,
         time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
       };
-
+ // Send message to the HTTP server 
+      try {
+        const response = await axios.post('http://localhost:8081/messages', messageData);
+        if (response.status === 200) {
+          setMessageList((list) => [...list, messageData]);
+          setCurrentMessage('');
+          console.log('Message sent successfully');
+        } else {
+          console.error('Failed to send message to HTTP server:', response.status);
+        }
+      } catch (error) {
+        console.error('Error sending message to HTTP server:', error);
+      }
       // Emit message to the socket server
       socket.emit('send_message', messageData);
 
