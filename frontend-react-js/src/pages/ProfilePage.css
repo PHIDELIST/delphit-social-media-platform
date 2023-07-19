@@ -94,7 +94,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-top: 4rem;
+    margin-top: 3rem;
     padding-left: 10px;
     padding-right: 10px;
 
@@ -119,6 +119,9 @@
     flex-direction: column;
     font-size: 15px;
     padding-bottom: 10px;
+    background-color: #F5F7F9;
+    border-radius: 10px;
+    margin-right: 10px;
     width: 100%;
     height: 100px;
     
