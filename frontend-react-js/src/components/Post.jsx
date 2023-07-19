@@ -6,29 +6,27 @@ import Comments from './Comments.jsx';
 import CommentForm from '../form/CommentForm.jsx';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import {postimgurl,avatarurl} from '../utilis.js'
-
+import { postimgurl, avatarurl } from '../utilis.js';
 
 function Post() {
   const token = useSelector((state) => state.user.token);
   const [posts, setPosts] = useState([]);
-  const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/posts',{
+        const response = await axios.get('http://localhost:8081/posts', {
           headers: {
-            authorization:token,
+            authorization: token,
           },
         });
         const fetchedPosts = response.data.map((post) => ({
           ...post,
-          username: post.username, 
-          avatar: post.avatarID, 
+          username: post.username,
+          avatar: post.avatarID,
+          showComments: false, // Add showComments state for each post
         }));
         setPosts(fetchedPosts);
-        
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -37,26 +35,29 @@ function Post() {
     fetchPosts();
   }, []);
 
-  const handleToggleComments = () => {
-    setShowComments(!showComments);
+  const handleToggleComments = (postId) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post.postID === postId ? { ...post, showComments: !post.showComments } : post
+      )
+    );
   };
 
   const handleAddComment = async (postId, comment) => {
-  
-  
     try {
-      const response = await axios.post(`http://localhost:8081/comments/${postId}`,{
-        content: comment
-      }
-      ,{
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: token,
-          
+      const response = await axios.post(
+        `http://localhost:8081/comments/${postId}`,
+        {
+          content: comment,
         },
-      });
-     
-  console.log(response);
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: token,
+          },
+        }
+      );
+
       // Update the comments in the local state
       const updatedPosts = posts.map((post) =>
         post.postID === postId ? { ...post, comments: response.data.comment.content } : post
@@ -66,8 +67,7 @@ function Post() {
       console.error('Error adding comment:', error);
     }
   };
-  
-  
+
   const handleLike = async (postId) => {
     try {
       // Find the post by postId
@@ -121,18 +121,17 @@ function Post() {
       {posts.map((post) => (
         <div className="post" key={post.postID}>
           <div className="post-header">
-            <img id='post-avatar' src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
+            <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
             <h4>@{post.username}</h4>
           </div>
           <div className="post-content">
             {!post.postImg ? (
-              <p>{post.content}</p>      
-            ) : (<>
               <p>{post.content}</p>
-              
-              <img className="displayImg" src={`${postimgurl}/${post.postImg}.jpeg`} alt="post" />
-              {/* <img src={post.postImg} alt="Post" className="post-image" /> */}
+            ) : (
+              <>
+                <p>{post.content}</p>
 
+                <img className="displayImg" src={`${postimgurl}/${post.postImg}.jpeg`} alt="post" />
               </>
             )}
           </div>
@@ -142,7 +141,7 @@ function Post() {
               <span>Like</span>
               <span>{post.likesCount}</span>
             </div>
-            <div className="comment-action" onClick={handleToggleComments}>
+            <div className="comment-action" onClick={() => handleToggleComments(post.postID)}>
               <FaComment className="icon" />
               <span>Comment</span>
             </div>
@@ -153,17 +152,15 @@ function Post() {
             </div>
           </div>
 
-          {showComments && (
+          {post.showComments && (
             <div className="comments-container">
               <Comments comments={post.comments} postId={post.postID} />
             </div>
           )}
-          {showComments && (
+          {post.showComments && (
             <div className="comment-form-container">
               {post.comments && post.comments.length > 0 && <hr />}
               <CommentForm postId={post.postID} onAddComment={handleAddComment} />
-
-
             </div>
           )}
         </div>
