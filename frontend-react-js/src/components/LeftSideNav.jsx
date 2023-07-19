@@ -44,15 +44,15 @@ function LeftSideNav() {
 },[])
   return (
   
-      <Sidebar id="leftSideNav" collapsed={collapsed}   className="sidebar"style={{ height: "100vh"}}>
+      <Sidebar id="leftSideNav" collapsed={collapsed}   style={{ height: "100vh"}}>
         <Menu>
           
         <MenuItem icon={<FaBars />} onClick={() => {   setCollapsed(!collapsed); }} style={{ textAlign: "center" }} > {" "}<img id="logo" src={Logo} alt="logo" /></MenuItem>
           
-        <MenuItem id="leftnav-btn" icon={<FaHome size={32}  id="icons" />}onClick={handleHome}>Home</MenuItem>
-         <MenuItem id="leftnav-btn" icon={<FaBell size={32} id="icons" />}onClick={handleNotifications}>Notifications</MenuItem>
-          <MenuItem id="leftnav-btn" icon={<FaComments size={32} id="icons"  />} onClick={handleChats}>Chats</MenuItem>
-          <MenuItem id="leftnav-btn" icon={<FaUserFriends size={32} id="icons"  />} onClick={handleFriends}>Friends</MenuItem>
+        <MenuItem id="leftnav-btn" icon={<FaHome size={30}  id="icons" />}onClick={handleHome}>Home</MenuItem>
+         <MenuItem id="leftnav-btn" icon={<FaBell size={30} id="icons" />}onClick={handleNotifications}>Notifications</MenuItem>
+          <MenuItem id="leftnav-btn" icon={<FaComments size={30} id="icons"  />} onClick={handleChats}>Chats</MenuItem>
+          <MenuItem id="leftnav-btn" icon={<FaUserFriends size={30} id="icons"  />} onClick={handleFriends}>Friends</MenuItem>
          <MenuItem id="leftnav-btn" icon={ <Avatar avatarID={avatarID }/> }onClick={handleProfile}>@{username}</MenuItem>        
       
       </Menu>

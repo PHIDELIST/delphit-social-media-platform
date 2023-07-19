@@ -10,7 +10,7 @@ export default function Search() {
       }
   return (
     <div id='search'>
-        <input type="search" placeholder="Search" />
+        <input id="search-input" type="search" placeholder="Search" />
         <button id="search-btn" onClick={handleSearch}><i className="fa-solid fa-magnifying-glass"></i>Search</button>
     </div>
   )

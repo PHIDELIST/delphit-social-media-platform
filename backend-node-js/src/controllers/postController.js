@@ -48,7 +48,7 @@ export const getAllPosts = async (req, res) => {
     const result = await pool
       .request()
       .query(
-        `SELECT Posts.*, Users.name AS username, Users.avatarID 
+        `SELECT Posts.*, Users.name AS username, Users.avatarID ,Users.bio
          FROM Posts
          INNER JOIN Users ON Posts.userID = Users.userID`
       );

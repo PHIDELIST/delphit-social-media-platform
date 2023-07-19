@@ -71,7 +71,6 @@ function RightSideNav() {
                   {users.map((user) => (
                     <li key={user.userID}>
                      <img className="displayImg" src={`${avatarurl}/${user.userID}.jpeg`} alt="Profile pic" />
-                      
                       <span>{user.name}</span>
                       <button onClick={() => handleFollow(user.userID)}>Follow</button>
                     </li>

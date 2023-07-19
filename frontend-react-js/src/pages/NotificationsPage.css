@@ -18,6 +18,11 @@
    flex-direction: column;
    gap: 3px;
 }
+.notification-avatar img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+ }
 .notification-list{
     list-style: none;
 }

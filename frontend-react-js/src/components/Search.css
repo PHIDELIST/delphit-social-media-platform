@@ -7,18 +7,24 @@
     margin-top: 10px; 
     border-bottom: 1px solid grey;
     padding-bottom: 10px;
+    flex-wrap: nowrap;
     
     
 }
-#search input{
+#search-input{
     height: 25px;
+    width: 50%;
+    background-color: #D4E6F3;
+    color: #7F8A86;
 
 }
 #search-btn{
   height: 30px;
 
 }
-#search input{
-    background-color: #D4E6F3;
-    color: #7F8A86;
+
+@media screen and (max-width: 480px) {
+    #search-btn{
+        display: none;
+    }
 }

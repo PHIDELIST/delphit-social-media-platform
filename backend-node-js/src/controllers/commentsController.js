@@ -62,14 +62,20 @@ export const getCommentsByPostID = async (req, res) => {
 
     const comments = await request
       .input('postId', sql.Int, postId)
-      .query('SELECT * FROM Comments WHERE postID = @postId ORDER BY comment_date DESC');
+      .query(`
+        SELECT c.commentID, c.userID, c.postID, c.comment_date, c.content, u.name
+        FROM Comments c
+        JOIN Users u ON c.userID = u.userID
+        WHERE c.postID = @postId
+        ORDER BY c.comment_date DESC
+      `);
 
-    res.json(comments.recordset); 
-    console.error('Error fetching comments:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  } catch(error){
+    res.json(comments.recordset);
+  } catch (error) {
     console.log(error);
-  }finally {
+    res.status(500).json({ message: 'Internal server error' });
+  } finally {
     sql.close();
   }
 };
+

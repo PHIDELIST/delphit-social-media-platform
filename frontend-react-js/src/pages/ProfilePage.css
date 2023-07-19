@@ -37,12 +37,10 @@
   
   .card__avatar {
     position: absolute;
-    /* width: 150px;
-    height: 150px; */
     background: var(--bg-color);
     border-radius: 100%;
     display: flex;
-    top: calc(45% - 57px);
+    top: calc(50% - 57px);
     margin-left: 3rem;
   }
  

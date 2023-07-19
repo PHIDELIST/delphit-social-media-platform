@@ -1,6 +1,7 @@
 import React from 'react';
 import './NotificationsPage.css';
 import Avatar from '../components/Avatar';
+import placeholder from '../assets/placeholder.jpg';
 function NotificationsPage() {
   const notifications = [
     {
@@ -69,7 +70,7 @@ function NotificationsPage() {
               <div className="notification-item">
                 <div className="notification-avatar">
                   @{notification.name}
-                  <Avatar />
+                  <img src={placeholder} alt="" />
                 </div>
                 <div className="notification-content">
                   <div className="notification-message">

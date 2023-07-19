@@ -20,11 +20,12 @@ function Post() {
             authorization: token,
           },
         });
+        console.log(response);
         const fetchedPosts = response.data.map((post) => ({
           ...post,
           username: post.username,
           avatar: post.avatarID,
-          showComments: false, // Add showComments state for each post
+          showComments: false, 
         }));
         setPosts(fetchedPosts);
       } catch (error) {
@@ -57,16 +58,25 @@ function Post() {
           },
         }
       );
-
+  
       // Update the comments in the local state
-      const updatedPosts = posts.map((post) =>
-        post.postID === postId ? { ...post, comments: response.data.comment.content } : post
-      );
+      const updatedPosts = posts.map((post) => {
+        if (post.postID === postId) {
+          const comments = post.comments || []; // Initialize as an empty array if comments are undefined
+          return {
+            ...post,
+            comments: [...comments, response.data.comment],
+          };
+        }
+        return post;
+      });
+  
       setPosts(updatedPosts);
     } catch (error) {
       console.error('Error adding comment:', error);
     }
   };
+  
 
   const handleLike = async (postId) => {
     try {
@@ -122,7 +132,10 @@ function Post() {
         <div className="post" key={post.postID}>
           <div className="post-header">
             <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
-            <h4>@{post.username}</h4>
+            <p>@{post.username}</p>
+            <div id='post-userdetails'>
+            <p>{post.bio}</p>
+            </div>
           </div>
           <div className="post-content">
             {!post.postImg ? (
