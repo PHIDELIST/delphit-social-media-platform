@@ -34,7 +34,7 @@ function Comments({ postId }) {
           </div>
         ))
       ) : (
-        <p>No comments available.</p>
+        <p>...</p>
       )}
     </div>
   );

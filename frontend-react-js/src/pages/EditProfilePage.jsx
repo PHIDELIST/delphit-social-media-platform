@@ -68,25 +68,26 @@ export default function ProfileForm() {
             if (uploadResponse.status === 200) {
               console.log('Upload successful');
             } else {
-              // Handle upload failure
+              console.log('Upload failed');
             }
           } catch (err) {
-            // Handle upload error
+           
+            console.log(err);
           }
         } else {
-          // Handle response error
+          
         }
       } catch (err) {
-        // Handle API request error
+       
       }
     } else {
-      // Handle no file selected
+   
     }
 
     // Update bio in the backend
     try {
       const bioResponse = await axios.post("http://localhost:8081/updateprofile", {
-        bio: bio, // Include the bio in the request body
+        bio: bio, 
       },{
         headers:{
           authorization:token
@@ -96,11 +97,14 @@ export default function ProfileForm() {
       if (bioResponse.status === 200) {
         console.log('Bio update successful');
       } else {
-        // Handle response error
+        
       }
     } catch (err) {
-      // Handle API request error
+      
     }
+    setBio("");
+    setAvatar(null);
+    setPreviewAvatar(null);
   };
 
   return (

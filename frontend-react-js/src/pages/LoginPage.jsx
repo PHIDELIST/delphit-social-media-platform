@@ -4,7 +4,7 @@ import Logo from '../assets/logo.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Auth } from 'aws-amplify'; // Import the Auth module from Amplify
+import { Auth } from 'aws-amplify'; 
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/userSlice';
 
@@ -55,8 +55,9 @@ function LoginPage() {
         <button type="submit">Login</button>
       </form>
       <p>
-        New here? <a href="/signup">SignUp</a>
+        New here?  <a href="/signup">SignUp</a> 
       </p>
+      <p>Can't remember your password? <a href="/reset-password">Reset Password</a></p>
     </div>
   );
 }

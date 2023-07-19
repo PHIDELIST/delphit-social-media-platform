@@ -7,7 +7,7 @@
     gap: 5rem;
     padding: 15px;
     align-items: center;
-    /* justify-content: center; */
+    border-radius: 5px;
     background-color: #EFF1F3;
     border-bottom: 1px solid gainsboro;
     margin: 10px;

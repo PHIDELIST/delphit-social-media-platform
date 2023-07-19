@@ -6,8 +6,8 @@ import ConfirmationPage from './pages/ConfirmationPage'
 import MainPage from './pages/MainPage'
 import { useSelector } from 'react-redux'
 import {Amplify} from 'aws-amplify';
-
 import {region,userPoolId,clientId} from './utilis.js'
+import RecoveryPage from './pages/RecoveryPage'
 
 Amplify.configure({
   "AWS_PROJECT_REGION": region,
@@ -31,6 +31,7 @@ const user = useSelector(state => state.user.userID);
       <Route path="/signin" element={<LoginPage />}/>
       <Route path='/confirm' element={<ConfirmationPage />} />
       <Route path="/signup" element={<SignUpPage />}/>
+      <Route path="/reset-password" element={<RecoveryPage />}/>
     </Routes>
     </BrowserRouter>
     </>
