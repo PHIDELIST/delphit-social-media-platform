@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 import './Chatsocket.css';
+import { url } from '../utilis';
 
 function Chatsocket({ username, room }) {
   const [socket, setSocket] = useState(null);
@@ -11,7 +12,7 @@ function Chatsocket({ username, room }) {
 
   useEffect(() => {
     // Connect to the socket server
-    const newSocket = io('http://localhost:8081');
+    const newSocket = io(`${url}`);
     newSocket.emit('join_room', room); // Join the room
     setSocket(newSocket);
   
@@ -39,7 +40,7 @@ function Chatsocket({ username, room }) {
       };
  // Send message to the HTTP server 
       try {
-        const response = await axios.post('http://localhost:8081/messages', messageData);
+        const response = await axios.post(`${url}/messages`, messageData);
         if (response.status === 200) {
           setMessageList((list) => [...list, messageData]);
           setCurrentMessage('');

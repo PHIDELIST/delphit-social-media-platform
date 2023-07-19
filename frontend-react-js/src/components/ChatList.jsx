@@ -4,6 +4,7 @@ import Avatar from './Avatar.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../redux/friendsSlice';
 import axios from 'axios';
+import { url } from '../utilis';
 
 function ChatList({ onSelectChat }) {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function ChatList({ onSelectChat }) {
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/messages', {
+        const response = await axios.get(`${url}/messages`, {
           headers: {
             Authorization: token,
           },

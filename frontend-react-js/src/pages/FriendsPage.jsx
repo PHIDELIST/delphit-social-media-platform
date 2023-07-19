@@ -5,6 +5,7 @@ import FriendItem from '../components/FriendItem';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Chatsocket from '../components/Chatsocket';
+import { url } from '../utilis';
 
 function FriendsPage() {
   const [friends, setFriends] = useState([]);
@@ -16,7 +17,7 @@ function FriendsPage() {
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/friends', {
+        const response = await axios.get(`${url}/friends`, {
           headers: {
             authorization: token,
           },

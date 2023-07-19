@@ -7,6 +7,7 @@ import { homeUI } from "../redux/uiSlice";
 import { useSelector } from 'react-redux';
 import { logout } from "../redux/userSlice";
 import {useNavigate} from 'react-router-dom';
+import { url } from '../utilis';
 import axios from 'axios'; 
 export default function ProfilePage() {
   const navigate = useNavigate(); 
@@ -28,7 +29,7 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchBio = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/updateprofile', {
+        const response = await axios.get(`${url}/updateprofile`, {
           headers: {
             authorization: token,
           },
@@ -41,7 +42,7 @@ export default function ProfilePage() {
       }
     };
 
-    fetchBio(); // Call the fetchBio function
+    fetchBio(); 
   }, [token]);
   const handlelogout = () => {
       dispatch(logout());

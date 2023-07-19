@@ -4,6 +4,7 @@ import Chatsocket from './Chatsocket';
 import { FaPaperPlane } from 'react-icons/fa';
 import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
+import { url } from '../utilis';
 
 function ChatWindow({ chat, onBack}) {
   const [showChat, setShowChat] = useState(false);
@@ -24,12 +25,12 @@ function ChatWindow({ chat, onBack}) {
 
   const joinRoom = () => {
     if (storedUsername && selectedUserId) {
-      const newSocket = io.connect('http://localhost:8081');
+      const newSocket = io.connect(`${url}`);
       setSocket(newSocket);
       newSocket.emit('join_room', room);
       setShowChat(true);
     } else {
-      // Handle error or show a message
+   
     }
   };
 

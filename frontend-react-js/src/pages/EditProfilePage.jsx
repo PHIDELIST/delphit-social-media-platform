@@ -4,7 +4,7 @@ import './EditProfilePage.css'
 import { useDispatch, useSelector } from "react-redux";
 import { homeUI } from "../redux/uiSlice";
 import axios from 'axios';
-import { presurl } from '../utilis';
+import { presurl ,url} from '../utilis';
 
 export default function ProfileForm() {
   const [bio, setBio] = useState("");
@@ -86,7 +86,7 @@ export default function ProfileForm() {
 
     // Update bio in the backend
     try {
-      const bioResponse = await axios.post("http://localhost:8081/updateprofile", {
+      const bioResponse = await axios.post(`${url}/updateprofile`, {
         bio: bio, 
       },{
         headers:{

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { FaThumbsUp, FaComment, FaRetweet } from 'react-icons/fa';
+import { FaThumbsUp, FaComment, FaRetweet, FaTrash } from 'react-icons/fa';
 import Avatar from '../assets/Avatar.jpg';
 import './Post.css';
 import Comments from './Comments.jsx';
 import CommentForm from '../form/CommentForm.jsx';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { postimgurl, avatarurl } from '../utilis.js';
+import { postimgurl, avatarurl ,url} from '../utilis.js';
 
 function Post() {
   const token = useSelector((state) => state.user.token);
@@ -15,7 +15,7 @@ function Post() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/posts', {
+        const response = await axios.get(`${url}/posts`, {
           headers: {
             authorization: token,
           },
@@ -25,7 +25,7 @@ function Post() {
           ...post,
           username: post.username,
           avatar: post.avatarID,
-          showComments: false, 
+          showComments: false,
         }));
         setPosts(fetchedPosts);
       } catch (error) {
@@ -47,7 +47,7 @@ function Post() {
   const handleAddComment = async (postId, comment) => {
     try {
       const response = await axios.post(
-        `http://localhost:8081/comments/${postId}`,
+        `${url}/comments/${postId}`,
         {
           content: comment,
         },
@@ -58,7 +58,7 @@ function Post() {
           },
         }
       );
-  
+
       // Update the comments in the local state
       const updatedPosts = posts.map((post) => {
         if (post.postID === postId) {
@@ -70,13 +70,12 @@ function Post() {
         }
         return post;
       });
-  
+
       setPosts(updatedPosts);
     } catch (error) {
       console.error('Error adding comment:', error);
     }
   };
-  
 
   const handleLike = async (postId) => {
     try {
@@ -93,7 +92,7 @@ function Post() {
       );
       setPosts(updatedPosts);
 
-      await axios.post(`http://localhost:8081/likesupdate/${postId}`, {
+      await axios.post(`${url}/likesupdate/${postId}`, {
         isLiked: updatedPost.isLiked,
       });
       console.log('Likes count updated in the backend');
@@ -117,12 +116,33 @@ function Post() {
       );
       setPosts(updatedPosts);
 
-      await axios.post(`http://localhost:8081/reposts/${postId}`, {
+      await axios.post(`${url}/reposts/${postId}`, {
         isReposted: updatedPost.isReposted,
       });
       console.log('Reposts count updated in the backend');
     } catch (error) {
       console.error('Error updating reposts count:', error);
+    }
+  };
+
+  const handleDeletePost = async (postId) => {
+    try {
+      await axios.delete(`${url}/posts/${postId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      setPosts((prevPosts) => prevPosts.filter((post) => post.postID !== postId));
+      console.log('Post deleted successfully');
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
+
+  const confirmDeletePost = (postId) => {
+    const shouldDelete = window.confirm('Are you sure you want to delete this post?');
+    if (shouldDelete) {
+      handleDeletePost(postId);
     }
   };
 
@@ -134,7 +154,7 @@ function Post() {
             <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
             <p>@{post.username}</p>
             <div id='post-userdetails'>
-            <p>{post.bio}</p>
+              <p>{post.bio}</p>
             </div>
           </div>
           <div className="post-content">
@@ -162,6 +182,10 @@ function Post() {
               <FaRetweet className="icon" />
               <span>Repost</span>
               <span>{post.repostCount}</span>
+            </div>
+            <div className="delete-action" onClick={() => confirmDeletePost(post.postID)}>
+              <FaTrash className="icon" />
+              <span>Delete</span>
             </div>
           </div>
 

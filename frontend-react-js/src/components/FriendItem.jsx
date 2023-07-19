@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './FriendItem.css';
 import Avatar from './Avatar';
 import axios from 'axios';
-import Chatsocket from './Chatsocket'; // Import the Chatsocket component
+import Chatsocket from './Chatsocket';
+import { url } from '../utilis';
 import { useSelector } from 'react-redux';
 function FriendItem({ friend }) {
   const { friendship_id, name, avatarID } = friend;
@@ -12,7 +13,7 @@ function FriendItem({ friend }) {
     const confirmDelete = window.confirm('Are you sure you want to delete this friendship?');
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8081/unfollow/${friendship_id}`);
+        await axios.delete(`${url}/unfollow/${friendship_id}`);
         console.log('Friendship deleted successfully');
       } catch (error) {
         console.error('Error deleting friendship:', error);

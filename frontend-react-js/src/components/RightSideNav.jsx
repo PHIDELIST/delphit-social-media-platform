@@ -3,7 +3,7 @@ import './RightSideNav.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import {avatarurl} from '../utilis.js'
+import {avatarurl,url} from '../utilis.js'
 import Trends from './Trends';
 
 
@@ -24,7 +24,7 @@ function RightSideNav() {
   const handleFollow = async (userID) => {
    
     try {
-      await axios.post(`http://localhost:8081/follow/${userID}`,{},
+      await axios.post(`${url}/follow/${userID}`,{},
         {
           headers: {
             authorization: token,
@@ -41,7 +41,7 @@ function RightSideNav() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/users');
+        const response = await axios.get(`${url}/users`);
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);

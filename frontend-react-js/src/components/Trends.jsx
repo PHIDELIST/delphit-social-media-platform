@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Trends.css'
+import { url } from '../utilis';
 
 function Trends() {
   const [highestLikedPost, setHighestLikedPost] = useState(null);
@@ -8,7 +9,7 @@ function Trends() {
   useEffect(() => {
     const fetchHighestLikedPost = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/trends');
+        const response = await axios.get(`${url}/trends`);
         setHighestLikedPost(response.data);
       } catch (error) {
         console.error('Error fetching highest liked post:', error);

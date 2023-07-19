@@ -8,7 +8,7 @@ function Comments({ postId }) {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/comments/${postId}`,{
+        const response = await axios.get(`${url}/comments/${postId}`,{
           headers: {
             'Content-Type': 'application/json',
             authorization: token,
