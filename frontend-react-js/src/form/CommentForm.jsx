@@ -11,7 +11,7 @@ function CommentForm({ postId, onAddComment }) {
       setComment('');
     }
   };
-  
+
   return (
     <form id="comment-form" onSubmit={handleSubmit}>
       <textarea

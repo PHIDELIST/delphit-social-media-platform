@@ -4,12 +4,14 @@ import delphitsocialRoutes from './src/routes/delphitsocialRoutes.js';
 import http from 'http'
 import cors from 'cors'
 import { Server } from 'socket.io'
+import bodyParser from 'body-parser'
 const app = express();
 
 app.use(express.json());
 //middleware
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 const server = http.createServer(app)
 
 //ROUTES

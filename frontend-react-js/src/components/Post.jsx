@@ -42,19 +42,24 @@ function Post() {
   };
 
   const handleAddComment = async (postId, comment) => {
+  
+  
     try {
-      const response = await axios.post(`http://localhost:8081/comments/${postId}`, comment
+      const response = await axios.post(`http://localhost:8081/comments/${postId}`,{
+        content: comment
+      }
       ,{
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           authorization: token,
+          
         },
       });
-      console.log('Comment added in the backend');
-  
+     
+  console.log(response);
       // Update the comments in the local state
       const updatedPosts = posts.map((post) =>
-        post.postID === postId ? { ...post, comments: response.data.comments } : post
+        post.postID === postId ? { ...post, comments: response.data.comment.content } : post
       );
       setPosts(updatedPosts);
     } catch (error) {
@@ -150,7 +155,7 @@ function Post() {
 
           {showComments && (
             <div className="comments-container">
-              <Comments comments={post.comments} />
+              <Comments comments={post.comments} postId={post.postID} />
             </div>
           )}
           {showComments && (
