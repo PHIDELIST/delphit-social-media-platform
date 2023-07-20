@@ -1,16 +1,13 @@
 import LeftSideNav from '../components/LeftSideNav';
-import Homepage from './Homepage';
+import HomePage from './HomePage';
 import RightSideNav from '../components/RightSideNav';
-import WelcomePage from './WelcomePage';
-import SignUpPage from './SignUpPage';
-import LoginPage from './LoginPage';
 import ProfilePage from './ProfilePage';
 import Chat from '../components/Chat';
 import NotificationsPage from './NotificationsPage';
 import FriendsPage from './FriendsPage';
 import PostCreationPage from './PostCreationPage';
 import EditProfilePage from './EditProfilePage';
-import HomePage from './Homepage';
+
 import './MainPage.css';
 import { useSelector } from 'react-redux';
 import Search from '../components/Search';
