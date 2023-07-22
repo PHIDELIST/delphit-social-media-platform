@@ -7,28 +7,15 @@
     gap: 10rem;
     align-items: center;
     position: fixed;
-    width: 24.5%;
+    width: 25%;
 }
 
-#signin-signup {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 90%;
-    height: 254px;
-    background: #07182E;
-    position: relative;
-    display: flex;
-    place-content: center;
-    place-items: center;
-    overflow: hidden;
-    border-radius: 20px;
-  }
+
   #trends{
     display: flex;
     flex-direction: column;
+    width: 80%;
     gap: 15px;
-    
     height: 254px;
     background: #EFF1F3;
     position: relative;

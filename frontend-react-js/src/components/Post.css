@@ -3,7 +3,7 @@
     margin: 10px;
     border-radius: 4px;
     padding: 10px;
-    width: 90%;
+    /* width: 90%; */
     
 
   }
@@ -14,7 +14,7 @@
     align-items: center;
     background-color: #eceff3;
     border-radius: 5px;
-    padding-left: 5px;
+    padding-left: 8px;
     margin: 0px;
 
   }
@@ -34,6 +34,7 @@
   }
   .post-content p {
    font-size: 10px;
+   padding: 10px;
 
   }
   .post-content img{
@@ -67,26 +68,3 @@
     margin-right: 10px;
   }
   
-  /* .post-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  
-  .post-actions > div {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .post-actions > div i {
-    margin-right: 5px;
-  }
-  
-  .post-actions > div span {
-    font-size: 14px;
-  }
-   */

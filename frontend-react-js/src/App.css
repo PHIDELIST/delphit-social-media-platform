@@ -1,5 +1,5 @@
 #root {
-  max-width: 1480px;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
   background-color: #F5F7F9;
@@ -8,8 +8,9 @@
   font-size: 20px;
   height: 100%;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px ){
   #root {
     font-size: smaller;
+    min-width: 330px;
   }
 }

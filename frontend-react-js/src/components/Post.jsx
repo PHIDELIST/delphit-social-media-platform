@@ -128,7 +128,7 @@ function Post() {
 
 
   return (
-    <div>
+    <div >
       {posts.reverse().map((post) => (
         <div className="post" key={post.postID}>
           <div className="post-header">

@@ -51,20 +51,11 @@ function RightSideNav() {
     fetchUsers();
   }, []);
 
-
   return (
     <div id='rightSideNav'>
-      {user ? (
         <div id='trends'>
           <Trends />
         </div>
-      ) : (
-        <div id='signin-signup'>
-          <button onClick={handleSignIn}>Sign In</button>
-          <button onClick={handleSignUp}>Sign Up</button>
-        </div>
-      )}
-
               <div id="platform-users">
                 <h6>Platform Users</h6>
                 <ul>
