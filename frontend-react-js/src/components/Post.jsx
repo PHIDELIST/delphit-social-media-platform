@@ -129,7 +129,7 @@ function Post() {
 
   return (
     <div>
-      {posts.map((post) => (
+      {posts.reverse().map((post) => (
         <div className="post" key={post.postID}>
           <div className="post-header">
             <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />

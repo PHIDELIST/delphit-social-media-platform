@@ -108,3 +108,16 @@
     height: 40px;
     border-radius: 50%;
   }
+  @media screen and (max-width: 768px) {
+    #rightSideNav {
+      padding: 0;
+      height: 100%;
+    }
+  #platform-users ul{
+    display: flex;
+    flex-direction: column;
+  }
+  #platform-users li {
+    flex-direction: column;
+  }
+  }

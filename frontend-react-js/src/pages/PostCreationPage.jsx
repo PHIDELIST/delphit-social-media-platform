@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './PostCreationPage.css';
 import placeholder from '../assets/placeholder.jpg';
-import { useDispatch, useSelector } from "react-redux";
-import { homeUI } from "../redux/uiSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { homeUI } from '../redux/uiSlice';
 import axios from 'axios';
 import { url, presurl_posts } from '../utilis';
 
@@ -12,6 +12,8 @@ function PostCreationPage() {
   const [postImg, setPostImg] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [updatedPostImg, setUpdatedPostImg] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(false);
   const dispatch = useDispatch();
 
   const handleTextChange = (event) => {
@@ -34,19 +36,17 @@ function PostCreationPage() {
   };
 
   const handleProfile = () => {
-    dispatch(homeUI("profile"));
+    dispatch(homeUI('profile'));
   };
 
   const handlePost = async () => {
-    console.log('content:', content);
-    console.log('Image:', postImg);
-  
+    setIsSubmitting(true);
+    setIsBackButtonDisabled(true);
+
     const postData = {
       content: content,
     };
 
-    console.log('postData:', postData);
-  
     try {
       const response = await axios.post(`${url}/posts`, postData, {
         headers: {
@@ -59,10 +59,8 @@ function PostCreationPage() {
       const { updatedPostImg } = response.data;
       console.log('Updated post image:', updatedPostImg);
 
-      // Set the updatedPostImg value in the state
       setUpdatedPostImg(updatedPostImg);
 
-      // Upload the post image
       if (postImg) {
         const extension = postImg.name.split('.').pop();
         const requestBody = {
@@ -76,8 +74,8 @@ function PostCreationPage() {
             try {
               const uploadResponse = await axios.put(presignedposturl, postImg, {
                 headers: {
-                  'Content-Type': "application/octet-stream",
-                }
+                  'Content-Type': 'application/octet-stream',
+                },
               });
               if (uploadResponse.status === 200) {
                 console.log('Upload successful');
@@ -95,30 +93,38 @@ function PostCreationPage() {
         }
       }
 
-      // Reset the input fields after post submission
       setContent('');
       setPostImg(null);
       setPreviewImage(null);
     } catch (error) {
       console.error('Error submitting post:', error);
+    } finally {
+      setIsSubmitting(false);
+      setIsBackButtonDisabled(false);
     }
   };
 
   return (
     <div className="post-container">
       <h2>Create a Post</h2>
-      <button onClick={handleProfile}>&larr;</button>
+      <button onClick={handleProfile} disabled={isSubmitting}>
+        &larr;
+      </button>
       <div className="post-form">
-        <textarea value={content} onChange={handleTextChange} placeholder="Enter your post text..."></textarea>
+        <textarea value={content} onChange={handleTextChange} disabled={isSubmitting} placeholder="Enter your post text..."></textarea>
         <div className="image-preview">
-          {previewImage ? (
-            <img src={previewImage} alt="Preview" />
-          ) : (
-            <img src={placeholder} alt="Placeholder" />
-          )}
+          {previewImage ? <img src={previewImage} alt="Preview" /> : <img src={placeholder} alt="Placeholder" />}
         </div>
         <input type="file" onChange={handleImageChange} />
-        <button onClick={handlePost}>Post</button>
+        <button onClick={handlePost} disabled={isSubmitting}>
+          Post
+        </button>
+        {isSubmitting && (
+          <div className="loading-overlay">
+            <div className="loading-dots">...</div>
+            <div>Please wait</div>
+          </div>
+        )}
       </div>
     </div>
   );

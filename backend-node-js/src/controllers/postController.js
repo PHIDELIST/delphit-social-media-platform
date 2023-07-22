@@ -1,10 +1,13 @@
-import sql from 'mssql'
-import config from '../db/config.js'
+import sql from 'mssql';
+import config from '../db/config.js';
 
 export const createPost = async (req, res) => {
   const { content, postImg } = req.body;
   const userID = req.user.userID;
-console.log(content, postImg, userID);
+  const currentDate = new Date().toISOString(); 
+
+  console.log(content, postImg, userID);
+
   try {
     const pool = await sql.connect(config.sql);
     const request = pool.request();
@@ -12,9 +15,10 @@ console.log(content, postImg, userID);
     request.input('userID', sql.NVarChar, userID);
     request.input('content', sql.VarChar, content);
     request.input('postImg', sql.VarChar, postImg);
+    request.input('post_date', sql.DateTime, currentDate); 
 
     const result = await request.query(
-      'INSERT INTO Posts (userID, content, postImg) OUTPUT inserted.postID VALUES (@userID, @content, @postImg)'
+      'INSERT INTO Posts (userID, content, postImg, post_date) OUTPUT inserted.postID VALUES (@userID, @content, @postImg, @post_date)'
     );
 
     const { postID } = result.recordset[0];
@@ -28,7 +32,8 @@ console.log(content, postImg, userID);
     await updateRequest.query(
       'UPDATE Posts SET postImg = @updatedPostImg WHERE postID = @postID'
     );
-console.log(updatedPostImg);
+
+    console.log(updatedPostImg);
     res.json({ message: 'Post created successfully', updatedPostImg: updatedPostImg });
   } catch (err) {
     console.log(err);
@@ -37,7 +42,6 @@ console.log(updatedPostImg);
     sql.close();
   }
 };
-
 
     
   

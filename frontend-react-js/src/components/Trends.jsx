@@ -24,7 +24,7 @@ function Trends() {
       <h4>Trending Post</h4>
       {highestLikedPost && (
         <div className="trending-post">
-          <p>{highestLikedPost.first4Words}...</p>
+          <p>#{highestLikedPost.first4Words}...</p>
         </div>
       )}
     </div>

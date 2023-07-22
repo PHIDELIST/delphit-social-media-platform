@@ -26,6 +26,7 @@ const user = useSelector(state => state.user.userID);
   return (
     <>
     <BrowserRouter>
+    
     <Routes>
       <Route path="/" element={user? <MainPage/> :<SignUpPage />}/>
       <Route path="/signin" element={<LoginPage />}/>
