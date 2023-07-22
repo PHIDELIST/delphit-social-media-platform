@@ -25,7 +25,9 @@ export default function ProfilePage() {
   const handleEditprofile = () => {
     dispatch(homeUI("editprofile"));
   };
-
+  const handleActivies = () => {
+    dispatch(homeUI("activities"));
+  }
   useEffect(() => {
     const fetchBio = async () => {
       try {
@@ -69,6 +71,7 @@ export default function ProfilePage() {
           </div>
           <div className="post-logout">
             <button id='logout' onClick={handleCreatepost}>Create Post</button>
+            <button id='logout' onClick={handleActivies}>Activies</button>'
             <button id='logout' onClick={handlelogout}><i className="fas fa-sign-out-alt"></i> Logout</button>
           </div>
         </div>

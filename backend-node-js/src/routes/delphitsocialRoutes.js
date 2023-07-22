@@ -1,5 +1,5 @@
 import { getChats, storeMessage } from '../controllers/messageController.js'
-import { createPost, getAllPosts } from '../controllers/postController.js'
+import { createPost, getAllPosts,postUpdate,getUserPosts,deletePost} from '../controllers/postController.js'
 import {updateLikes} from '../controllers/likesController.js'
 import {updateRepost} from '../controllers/repostController.js'
 import {createComment,getCommentsByPostID } from '../controllers/commentsController.js'
@@ -16,6 +16,9 @@ const delphitsocialRoutes = (app) => {
     app.route('/posts')
         .post(authorizeMiddleware,createPost)
         .get(authorizeMiddleware,getAllPosts)
+    app.route('/posts/:postId')
+        .delete(deletePost)
+        .put(authorizeMiddleware,postUpdate)
     app.route('/messages')
         .post(storeMessage)
         .get(authorizeMiddleware,getChats)
@@ -26,7 +29,8 @@ const delphitsocialRoutes = (app) => {
     app.route('/comments/:postId')
         .post(authorizeMiddleware,createComment)
         .get(authorizeMiddleware,getCommentsByPostID )
-
+    app.route('/activities')
+        .get(authorizeMiddleware,getUserPosts)
     app.route('/users')
         .get(getUsers)
         

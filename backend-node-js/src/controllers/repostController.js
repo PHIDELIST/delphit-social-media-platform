@@ -5,6 +5,7 @@ import config from '../db/config.js';
 export const updateRepost = async (req, res) => {
     const { postId } = req.params;
     const { isReposted } = req.body;
+    console.log(postId, isReposted);
   
     try {
       const pool = await sql.connect(config.sql);

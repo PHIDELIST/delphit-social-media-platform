@@ -125,26 +125,7 @@ function Post() {
     }
   };
 
-  const handleDeletePost = async (postId) => {
-    try {
-      await axios.delete(`${url}/posts/${postId}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      setPosts((prevPosts) => prevPosts.filter((post) => post.postID !== postId));
-      console.log('Post deleted successfully');
-    } catch (error) {
-      console.error('Error deleting post:', error);
-    }
-  };
 
-  const confirmDeletePost = (postId) => {
-    const shouldDelete = window.confirm('Are you sure you want to delete this post?');
-    if (shouldDelete) {
-      handleDeletePost(postId);
-    }
-  };
 
   return (
     <div>
@@ -183,10 +164,7 @@ function Post() {
               <span>Repost</span>
               <span>{post.repostCount}</span>
             </div>
-            <div className="delete-action" onClick={() => confirmDeletePost(post.postID)}>
-              <FaTrash className="icon" />
-              <span>Delete</span>
-            </div>
+         
           </div>
 
           {post.showComments && (

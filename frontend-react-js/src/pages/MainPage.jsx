@@ -7,10 +7,10 @@ import NotificationsPage from './NotificationsPage';
 import FriendsPage from './FriendsPage';
 import PostCreationPage from './PostCreationPage';
 import EditProfilePage from './EditProfilePage';
-
 import './MainPage.css';
 import { useSelector } from 'react-redux';
 import Search from '../components/Search';
+import ActivitiesPage from './ActivitiesPage';
 
 function MainPage() {
   const { ui } = useSelector((state) => state.ui);
@@ -63,6 +63,13 @@ function MainPage() {
               <Search />
             </div>
           )}
+          {
+            ui === 'activities' && (
+              <div id='mainpage_wrapper'>
+                <ActivitiesPage />
+               </div>
+            ) 
+          }
         </div>
         <div id='NavRight'>
           <RightSideNav />
