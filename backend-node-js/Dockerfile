@@ -1,5 +1,5 @@
 # Base Image ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-FROM node:18.16.0 AS build
+FROM node:18.16.0-alpine AS build
 
 COPY . ./backend-node-js
 WORKDIR /backend-node-js
