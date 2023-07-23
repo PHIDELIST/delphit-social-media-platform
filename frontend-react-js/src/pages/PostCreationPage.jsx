@@ -4,6 +4,7 @@ import placeholder from '../assets/placeholder.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { homeUI } from '../redux/uiSlice';
 import axios from 'axios';
+import Loader from '../Loader'
 import { url, presurl_posts } from '../utilis';
 
 function PostCreationPage() {
@@ -121,7 +122,7 @@ function PostCreationPage() {
         </button>
         {isSubmitting && (
           <div className="loading-overlay">
-            <div className="loading-dots">...</div>
+            <div className="loading-dots"><Loader /></div>
             <div>Please wait</div>
           </div>
         )}
