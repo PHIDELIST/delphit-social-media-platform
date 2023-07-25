@@ -23,7 +23,7 @@ export const createPost = async (req, res) => {
 
     const { postID } = result.recordset[0];
 
-    const updatedPostImg = `${postID}`; // Combine postID and postImg
+    const updatedPostImg = `${postID}`; 
 
     const updateRequest = pool.request();
     updateRequest.input('postID', sql.Int, postID);
@@ -66,6 +66,7 @@ export const getAllPosts = async (req, res) => {
     sql.close();
   }
 };
+
 //getting posts for a specific user
 export const getUserPosts = async (req, res) => {
   try {

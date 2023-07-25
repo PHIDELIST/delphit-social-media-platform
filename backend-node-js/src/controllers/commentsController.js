@@ -35,7 +35,7 @@ export const createComment = async (req, res) => {
       .input('userID', sql.NVarChar, newComment.userID)
      
       .input('content', sql.VarChar(500), newComment.content)
-      .query('INSERT INTO Comments (userID, postID, content) OUTPUT inserted.commentID, inserted.userID, inserted.comment_date, inserted.content VALUES (@userID, @postId, @content)');
+      .query('INSERT INTO Comments (userID, postID, content) OUTPUT inserted.commentID, inserted.userID, inserted.content VALUES (@userID, @postId, @content)');
 
     const insertedComment = result.recordset[0]; 
 
@@ -55,8 +55,10 @@ export const createComment = async (req, res) => {
 
 export const getCommentsByPostID = async (req, res) => {
   const { postId } = req.params;
+  let pool;
+
   try {
-    const pool = await sql.connect(config.sql);
+    pool = await sql.connect(config.sql);
     const request = pool.request();
 
     const comments = await request
@@ -74,7 +76,14 @@ export const getCommentsByPostID = async (req, res) => {
     console.log(error);
     res.status(500).json({ message: 'Internal server error' });
   } finally {
-    sql.close();
+    if (pool) {
+      try {
+        await pool.close();
+      } catch (err) {
+        console.log('Error closing the connection pool:', err);
+      }
+    }
   }
 };
+
 
