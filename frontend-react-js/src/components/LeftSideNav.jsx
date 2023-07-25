@@ -3,7 +3,7 @@ import "./LeftSideNav.css";
 import { useEffect, useState } from "react";
 import { Sidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
 import Avatar from "../components/Avatar";
-import { FaBars, FaHome, FaBell, FaComments, FaUserFriends, FaUser,} from "react-icons/fa";
+import { FaBars, FaHome, FaBell, FaComments, FaUserFriends,FaPlusCircle,} from "react-icons/fa";
 import {useDispatch} from "react-redux"
 import {homeUI} from "../redux/uiSlice";
 import { useSelector } from "react-redux";
@@ -12,6 +12,9 @@ function LeftSideNav() {
   const avatarID = useSelector((state) => state.user.userID);
   const dispatch = useDispatch();
 
+  const handleCreatepost = () => {
+    dispatch(homeUI("createpost"));
+  };
 
   const handleHome = ()=> {
     dispatch(homeUI("home"));
@@ -53,8 +56,8 @@ function LeftSideNav() {
          <MenuItem id="leftnav-btn" icon={<FaBell size={30} id="icons" />}onClick={handleNotifications}>Notifications</MenuItem>
           <MenuItem id="leftnav-btn" icon={<FaComments size={30} id="icons"  />} onClick={handleChats}>Chats</MenuItem>
           <MenuItem id="leftnav-btn" icon={<FaUserFriends size={30} id="icons"  />} onClick={handleFriends}>Friends</MenuItem>
-         <MenuItem id="leftnav-btn" icon={ <Avatar avatarID={avatarID }/> }onClick={handleProfile}>@{username}</MenuItem>        
-      
+         <MenuItem id="leftnav-avatar" icon={ <Avatar avatarID={avatarID } /> }onClick={handleProfile}>@{username}</MenuItem>  
+         <button id='logout' onClick={handleCreatepost}> <FaPlusCircle />post</button>      
       </Menu>
       </Sidebar>      
   );

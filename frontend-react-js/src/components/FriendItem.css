@@ -4,10 +4,9 @@
   flex-direction: column;
   gap: 5rem;
   padding: 15px;
-  
   background-color: #EFF1F3;
   border-bottom: 1px solid gainsboro;
-  margin: 10px;
+
 }
 #friend-container-header {
   display: flex;

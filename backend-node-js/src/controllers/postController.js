@@ -15,10 +15,10 @@ export const createPost = async (req, res) => {
     request.input('userID', sql.NVarChar, userID);
     request.input('content', sql.VarChar, content);
     request.input('postImg', sql.VarChar, postImg);
-    request.input('post_date', sql.DateTime, currentDate); 
+   
 
     const result = await request.query(
-      'INSERT INTO Posts (userID, content, postImg, post_date) OUTPUT inserted.postID VALUES (@userID, @content, @postImg, @post_date)'
+      'INSERT INTO Posts (userID, content, postImg) OUTPUT inserted.postID VALUES (@userID, @content, @postImg)'
     );
 
     const { postID } = result.recordset[0];

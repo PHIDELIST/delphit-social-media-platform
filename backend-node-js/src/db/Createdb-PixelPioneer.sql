@@ -14,7 +14,7 @@ CREATE TABLE Likes (
   likeID INT PRIMARY KEY IDENTITY(1,1),
   userID NVARCHAR(500),
   postID INT,
-  like_date DATE,
+  like_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT FK_likes_userID
   FOREIGN KEY (userID)
   REFERENCES Users(userID)  ON DELETE CASCADE
@@ -25,7 +25,7 @@ CREATE TABLE Posts (
   userID NVARCHAR(500),
   content VARCHAR(1000),
   postImg VARCHAR(256),
-  post_date DATE,
+  post_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   likesCount INT,
   repostCount INT, 
   CONSTRAINT FK_post_userID
@@ -46,7 +46,7 @@ CREATE TABLE Friendship (
   friendship_id INT PRIMARY KEY IDENTITY(1,1),
   user1ID NVARCHAR(500),
   user2ID NVARCHAR(500),
-  friendship_date DATE,
+  friendship_date DATETIME DEFAULT CURRENT_TIMESTAMP,
  
 );
 
@@ -54,7 +54,7 @@ CREATE TABLE Comments (
   commentID INT PRIMARY KEY IDENTITY(1,1),
   userID NVARCHAR(500),
   postID INT,
-  comment_date DATE,
+  comment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   content VARCHAR(500), 
   CONSTRAINT FK_comment_userID
     FOREIGN KEY (userID)

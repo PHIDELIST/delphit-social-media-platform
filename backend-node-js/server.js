@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 //middleware
-app.use(cors())
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const server = http.createServer(app)
@@ -17,7 +17,7 @@ const server = http.createServer(app)
 //ROUTES
 delphitsocialRoutes(app);
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello delphit!');
 
 });
 const io = new Server(server,{

@@ -132,10 +132,15 @@ function Post() {
       {posts.reverse().map((post) => (
         <div className="post" key={post.postID}>
           <div className="post-header">
-            <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
-            <p>@{post.username}</p>
+            <div id="post-avatar-container">
+              <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
             <div id='post-userdetails'>
+              <p>@{post.username}</p>
               <p>{post.bio}</p>
+            </div>
+            </div>
+            <div id = "date">
+              <p>{new Date(post.post_date).toUTCString()}</p>
             </div>
           </div>
           <div className="post-content">
@@ -144,7 +149,7 @@ function Post() {
             ) : (
               <>
                 <p>{post.content}</p>
-
+                
                 <img className="displayImg" src={`${postimgurl}/${post.postImg}.jpeg`} alt="post" />
               </>
             )}

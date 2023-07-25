@@ -1,5 +1,14 @@
-.trending-post {
-    margin: 5px;
+.trends-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+.trends-container h6{
+    padding: 5px;
+    margin: 0;
 }
 .trending-post p{
     color: blue;
