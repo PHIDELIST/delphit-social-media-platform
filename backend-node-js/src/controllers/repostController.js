@@ -35,7 +35,6 @@ export const updateRepost = async (req, res) => {
           userID: originalPost.userID,
           content: originalPost.content,
           postImg: originalPost.postImg,
-          post_date: new Date(),
           likesCount: 0,
           repostCount: 0,
         };
@@ -45,11 +44,10 @@ export const updateRepost = async (req, res) => {
           .input('repostedUserID', sql.NVarChar, repostedPost.userID)
           .input('repostedContent', sql.VarChar(1000), repostedPost.content)
           .input('repostedPostImg', sql.VarChar(256), repostedPost.postImg)
-          .input('repostedPostDate', sql.Date, repostedPost.post_date)
           .input('repostedLikesCount', sql.Int, repostedPost.likesCount)
           .input('repostedRepostCount', sql.Int, repostedPost.repostCount)
           .query(
-            'INSERT INTO Posts (userID, content, postImg, post_date, likesCount, repostCount) OUTPUT inserted.postID VALUES (@repostedUserID, @repostedContent, @repostedPostImg, @repostedPostDate, @repostedLikesCount, @repostedRepostCount)'
+            'INSERT INTO Posts (userID, content, postImg,likesCount, repostCount) OUTPUT inserted.postID VALUES (@repostedUserID, @repostedContent, @repostedPostImg, @repostedLikesCount, @repostedRepostCount)'
           );
   
         const repostedPostId = insertResult.recordset[0].postID;

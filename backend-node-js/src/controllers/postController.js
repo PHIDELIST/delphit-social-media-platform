@@ -15,15 +15,15 @@ export const createPost = async (req, res) => {
     request.input('userID', sql.NVarChar, userID);
     request.input('content', sql.VarChar, content);
     request.input('postImg', sql.VarChar, postImg);
-    request.input('post_date', sql.DateTime, currentDate); 
+   
 
     const result = await request.query(
-      'INSERT INTO Posts (userID, content, postImg, post_date) OUTPUT inserted.postID VALUES (@userID, @content, @postImg, @post_date)'
+      'INSERT INTO Posts (userID, content, postImg) OUTPUT inserted.postID VALUES (@userID, @content, @postImg)'
     );
 
     const { postID } = result.recordset[0];
 
-    const updatedPostImg = `${postID}`; // Combine postID and postImg
+    const updatedPostImg = `${postID}`; 
 
     const updateRequest = pool.request();
     updateRequest.input('postID', sql.Int, postID);
@@ -66,6 +66,7 @@ export const getAllPosts = async (req, res) => {
     sql.close();
   }
 };
+
 //getting posts for a specific user
 export const getUserPosts = async (req, res) => {
   try {

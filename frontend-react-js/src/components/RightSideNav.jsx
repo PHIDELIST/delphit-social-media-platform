@@ -57,7 +57,7 @@ function RightSideNav() {
           <Trends />
         </div>
               <div id="platform-users">
-                <h6>Platform Users</h6>
+                <h6>Suggested Users</h6>
                 <ul>
                   {users.map((user) => (
                     <li key={user.userID}>

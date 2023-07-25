@@ -13,7 +13,7 @@ function ChatWindow({ chat, onBack}) {
   const storedUsername = useSelector((state) => state.user.user);
   const storedUserId = useSelector ((state) => state.user.userID)
   const selectedUserId = useSelector((state) => state.friends.selectedUser);
-  // const room = `${storedUserId}-${selectedUserId}`;
+ 
 
 
 

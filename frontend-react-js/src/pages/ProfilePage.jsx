@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import { logout } from "../redux/userSlice";
 import {useNavigate} from 'react-router-dom';
 import { url } from '../utilis';
+import { FaSignOutAlt, FaTasks, FaPlusCircle,FaEdit } from 'react-icons/fa';
+
 import axios from 'axios'; 
 export default function ProfilePage() {
   const navigate = useNavigate(); 
@@ -63,16 +65,16 @@ export default function ProfilePage() {
           </div>
           <div className="email-editprofile">
             <h6>Email: {useremail}</h6>
-            <button onClick={handleEditprofile} id='logout'> Edit Profile</button>
+            <button onClick={handleEditprofile} id='logout'><FaEdit /></button>
           </div>
           <div className='bio'>
             <h5>About {username}</h5>
             <p> {bio}</p>
           </div>
           <div className="post-logout">
-            <button id='logout' onClick={handleCreatepost}>Create Post</button>
-            <button id='logout' onClick={handleActivies}>Activies</button>'
-            <button id='logout' onClick={handlelogout}><i className="fas fa-sign-out-alt"></i> Logout</button>
+            <button id='logout' onClick={handleCreatepost}> <FaPlusCircle />post</button>
+            <button id='logout' onClick={handleActivies}> <FaTasks />activities</button>
+            <button id='logout' onClick={handlelogout}><i className="fas fa-sign-out-alt"></i>  <FaSignOutAlt />logout</button>
           </div>
         </div>
       </div>

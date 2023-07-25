@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './Comments.css'
+import { url } from '../utilis';
 function Comments({ postId }) {
   const [commentsData, setCommentsData] = useState([]);
   const token = useSelector((state) => state.user.token);
@@ -39,7 +40,7 @@ function Comments({ postId }) {
           </div>
         ))
       ) : (
-        <p>...</p>
+        <p>loading comments...</p>
       )}
     </div>
   );

@@ -21,7 +21,7 @@ function Trends() {
 
   return (
     <div className="trends-container">
-      <h4>Trending Post</h4>
+      <h6>Trending Post</h6>
       {highestLikedPost && (
         <div className="trending-post">
           <p>#{highestLikedPost.first4Words}...</p>

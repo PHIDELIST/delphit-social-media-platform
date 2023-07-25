@@ -27,18 +27,17 @@ export const createComment = async (req, res) => {
     const newComment = {
       userID: userID,
       postID: postId,
-      comment_date: new Date(),
       content: content,
     };
 
     // Insert the comment into the database
     const result = await request
       .input('userID', sql.NVarChar, newComment.userID)
-      .input('comment_date', sql.DateTime2, newComment.comment_date)
+     
       .input('content', sql.VarChar(500), newComment.content)
-      .query('INSERT INTO Comments (userID, postID, comment_date, content) OUTPUT inserted.commentID, inserted.userID, inserted.comment_date, inserted.content VALUES (@userID, @postId, @comment_date, @content)');
+      .query('INSERT INTO Comments (userID, postID, content) OUTPUT inserted.commentID, inserted.userID, inserted.content VALUES (@userID, @postId, @content)');
 
-    const insertedComment = result.recordset[0]; // Newly inserted comment
+    const insertedComment = result.recordset[0]; 
 
     console.log('Comment created:', insertedComment);
 
@@ -56,8 +55,10 @@ export const createComment = async (req, res) => {
 
 export const getCommentsByPostID = async (req, res) => {
   const { postId } = req.params;
+  let pool;
+
   try {
-    const pool = await sql.connect(config.sql);
+    pool = await sql.connect(config.sql);
     const request = pool.request();
 
     const comments = await request
@@ -75,7 +76,14 @@ export const getCommentsByPostID = async (req, res) => {
     console.log(error);
     res.status(500).json({ message: 'Internal server error' });
   } finally {
-    sql.close();
+    if (pool) {
+      try {
+        await pool.close();
+      } catch (err) {
+        console.log('Error closing the connection pool:', err);
+      }
+    }
   }
 };
+
 

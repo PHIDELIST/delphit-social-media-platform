@@ -34,7 +34,7 @@ export const followUser = async (req, res) => {
     }
 
     // Create the follow relationship
-    const insertQuery = `INSERT INTO Friendship (user1ID, user2ID, friendship_date) VALUES (@followerID, @userID, GETDATE())`;
+    const insertQuery = `INSERT INTO Friendship (user1ID, user2ID) VALUES (@followerID, @userID)`;
     const insertResult = await pool.request()
       .input('followerID', sql.NVarChar, followerID)
       .input('userID', sql.NVarChar, userID)

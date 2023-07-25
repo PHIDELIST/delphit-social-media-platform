@@ -54,9 +54,9 @@ function Chatsocket({ username, room }) {
       // Emit message to the socket server
       socket.emit('send_message', messageData);
 
-      setMessageList((list) => [...list, messageData]); // Add the sent message to the list
-      setCurrentMessage(''); // Clear the input field after sending
-      inputRef.current.focus(); // Focus on the input field after sending
+      setMessageList((list) => [...list, messageData]); 
+      setCurrentMessage(''); 
+      inputRef.current.focus(); 
     }
   };
 

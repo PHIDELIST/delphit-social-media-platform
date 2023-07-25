@@ -91,16 +91,21 @@ function ActivitiesPage() {
     dispatch(homeUI("profile"));
   };
   return (
-    <div>
+    <div id="activities">
       <button onClick={handleProfile}>&larr;</button>
       <h6>Activities</h6>
       {posts.map((post) => (
         <div className="post" key={post.postID}>
           <div className="post-header">
-            <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
-            <p>@{post.username}</p>
-            <div id="post-userdetails">
+            <div id="post-avatar-container">
+              <img id="post-avatar" src={`${avatarurl}/${post.avatar}.jpeg`} alt="Profile pic" />
+            <div id='post-userdetails'>
+              <p>@{post.username}</p>
               <p>{post.bio}</p>
+            </div>
+            </div>
+            <div id = "date">
+              <p>{new Date(post.post_date).toUTCString()}</p>
             </div>
           </div>
           <div className="post-content">
