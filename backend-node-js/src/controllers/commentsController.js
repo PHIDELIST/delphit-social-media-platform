@@ -1,6 +1,6 @@
 import sql from 'mssql';
 import config from '../db/config.js';
-import * as e from 'express';
+
 
 export const createComment = async (req, res) => {
   console.log(req.body);
