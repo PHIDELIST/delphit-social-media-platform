@@ -1,37 +1,47 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './NotificationsPage.css';
-import {useSelector} from 'react-redux';
 import placeholder from '../assets/placeholder.jpg';
 import axios from 'axios';
-import {url} from '../utilis.js'
+import { url } from '../utilis.js';
+import { setLoading } from '../redux/loadingSlice.js';
+import Loader from '../Loader.jsx'
 
 function NotificationsPage() {
   const [notifications, setNotifications] = useState([]);
-const token = useSelector(state => state.user.token);
+  const token = useSelector(state => state.user.token);
+  const isLoading = useSelector((state) => state.loading);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    // Fetch notifications from the backend API
     const fetchNotifications = async () => {
+      // Set loading to true before fetching notifications
+      dispatch(setLoading(true));
+
       try {
         const response = await axios.get(`${url}/notifications`,{
-          headers:{
-            'authorization':token
-          
-        }}); 
+          headers: {
+            'authorization': token
+          }
+        }); 
         const data = response.data;
         setNotifications(data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
+      } finally {
+        // Set loading to false after the API call, regardless of success or failure
+        dispatch(setLoading(false));
       }
     };
 
     fetchNotifications();
-  }, []);
+  }, [dispatch, token]);
 
   const handleNotificationClick = async (notificationID) => {
     // Make a request to the backend API to update the notification status
     try {
       await axios.patch(`${url}/notifications/${notificationID}`, { read: true });
-      // Update the local state to mark the notification as read
+      
       setNotifications((prevNotifications) =>
         prevNotifications.map((notification) =>
           notification.notificationID === notificationID ? { ...notification, read: true } : notification
@@ -44,8 +54,8 @@ const token = useSelector(state => state.user.token);
 
   return (
     <div className="notifications-container">
-      {notifications.length === 0 ? (
-        <p>No new notifications</p>
+      {isLoading ? (
+        <Loader />
       ) : (
         <ul className="notification-list">
           {notifications.map((notification) => (
