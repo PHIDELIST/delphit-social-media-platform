@@ -5,7 +5,7 @@ import http from 'http';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import bodyParser from 'body-parser';
-import { sendNotifications } from './src/controllers/notificationsController.js'; // Import the sendNotifications function
+import { sendNotifications } from './src/controllers/notificationsController.js';
 
 const app = express();
 

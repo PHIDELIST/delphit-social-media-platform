@@ -3,6 +3,7 @@ import './NotificationsPage.css';
 import {useSelector} from 'react-redux';
 import placeholder from '../assets/placeholder.jpg';
 import axios from 'axios';
+import {url} from '../utilis.js'
 
 function NotificationsPage() {
   const [notifications, setNotifications] = useState([]);
@@ -11,7 +12,7 @@ const token = useSelector(state => state.user.token);
     // Fetch notifications from the backend API
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/notifications',{
+        const response = await axios.get(`${url}/notifications`,{
           headers:{
             'authorization':token
           
@@ -29,7 +30,7 @@ const token = useSelector(state => state.user.token);
   const handleNotificationClick = async (notificationID) => {
     // Make a request to the backend API to update the notification status
     try {
-      await axios.patch(`http://localhost:8081/notifications/${notificationID}`, { read: true });
+      await axios.patch(`${url}/notifications/${notificationID}`, { read: true });
       // Update the local state to mark the notification as read
       setNotifications((prevNotifications) =>
         prevNotifications.map((notification) =>
