@@ -7,12 +7,28 @@
     gap: 5rem;
     padding: 15px;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #EFF1F3;
     border-bottom: 1px solid gainsboro;
     margin: 10px;
     
 }
+
+@keyframes buttonAnimation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .animatedButton {
+    animation: buttonAnimation 1.5s infinite;
+  } 
 .notification-avatar {
    display: flex;
    flex-direction: column;

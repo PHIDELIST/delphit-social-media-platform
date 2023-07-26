@@ -64,7 +64,7 @@ function NotificationsPage() {
               key={notification.notificationID}
               className={notification.read ? 'read' : 'unread'}
             >
-              <div className="notification-item" onClick={() => handleNotificationClick(notification.notificationID)}>
+              <div className="notification-item animatedButton" onClick={() => handleNotificationClick(notification.notificationID)}>
                 <div className="notification-avatar">
                   @{notification.name}
                   <img className="displayImg" src={`${avatarurl}/${notification.avatar}.jpeg`} alt="Profile pic" />

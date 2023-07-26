@@ -5,7 +5,7 @@
   gap: 5rem;
   position: fixed;
   height: 76vh;
-  /* margin-left: 19px; */
+  border-radius: 10px;
   left: 0;
 }
 
@@ -13,7 +13,7 @@
   margin-top: 5px;
   height: 80px;
   margin-top: 15px;
-  /* background-color: #74abf3; */
+
   border-radius: 5px;
   display: flex;
   flex-direction: row;
