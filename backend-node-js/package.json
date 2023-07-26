@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node server.js"
+    
   },
   "engines": {
     "node": ">=18.16.0"
@@ -17,7 +17,6 @@
     "aws-amplify": "^5.3.4",
     "aws-jwt-verify": "^4.0.0",
     "axios": "^1.4.0",
-    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -25,7 +24,6 @@
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.1",
     "mssql": "^9.1.1",
-    "nodemon": "^2.0.22",
     "rollbar": "^2.26.2",
     "socket.io": "^4.7.1"
   }
