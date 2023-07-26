@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './NotificationsPage.css';
 import placeholder from '../assets/placeholder.jpg';
 import axios from 'axios';
-import { url } from '../utilis.js';
+import { url ,avatarurl} from '../utilis.js';
 import { setLoading } from '../redux/loadingSlice.js';
 import Loader from '../Loader.jsx'
 
@@ -25,11 +25,12 @@ function NotificationsPage() {
           }
         }); 
         const data = response.data;
+      
         setNotifications(data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
       } finally {
-        // Set loading to false after the API call, regardless of success or failure
+        
         dispatch(setLoading(false));
       }
     };
@@ -66,7 +67,7 @@ function NotificationsPage() {
               <div className="notification-item" onClick={() => handleNotificationClick(notification.notificationID)}>
                 <div className="notification-avatar">
                   @{notification.name}
-                  <img src={placeholder} alt="" />
+                  <img className="displayImg" src={`${avatarurl}/${notification.avatar}.jpeg`} alt="Profile pic" />
                 </div>
                 <div className="notification-content">
                   <div className="notification-message">

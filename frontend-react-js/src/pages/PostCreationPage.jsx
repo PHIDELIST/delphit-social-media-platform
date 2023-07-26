@@ -121,10 +121,10 @@ function PostCreationPage() {
           Post
         </button>
         {isSubmitting && (
-          <div className="loading-overlay">
-            <div className="loading-dots"><Loader /></div>
-            <div>Please wait</div>
-          </div>
+         
+          <Loader />
+        
+         
         )}
       </div>
     </div>
