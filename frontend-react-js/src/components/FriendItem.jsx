@@ -5,10 +5,13 @@ import axios from 'axios';
 import Chatsocket from './Chatsocket';
 import { url } from '../utilis';
 import { useSelector } from 'react-redux';
+import { FaUserTimes, FaCommentDots } from 'react-icons/fa'; // Import Font Awesome icons
+
 function FriendItem({ friend }) {
   const { friendship_id, name, avatarID } = friend;
   const [showChat, setShowChat] = useState(false); // State variable to toggle chat display
-  const username = useSelector(state => state.user.name)
+  const username = useSelector(state => state.user.name);
+
   const handleDeleteFriendship = async () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this friendship?');
     if (confirmDelete) {
@@ -24,20 +27,23 @@ function FriendItem({ friend }) {
   return (
     <li className="friend-item">
       <div id="friend-container-header">
-      <div className="friend-avatar">
-      @{name}
-        <Avatar avatarID={avatarID} />
-      
+        <div className="friend-avatar">
+          @{name}
+          <Avatar avatarID={avatarID} />
+        </div>
+        <div className="friend-btns">
+          <button onClick={handleDeleteFriendship}>
+            <FaUserTimes /> Unfollow
+          </button>
+          <button onClick={() => setShowChat(!showChat)}>
+            <FaCommentDots /> Chat
+          </button>
+        </div>
       </div>
-      <div className="friend-btns">
-        <button onClick={handleDeleteFriendship}>Unfollow</button>
-        <button onClick={() => setShowChat(!showChat)}>Chat</button>
-       </div>
-       </div>
-       <div className="chat-container"> 
+      <div className="chat-container">
         {showChat && (
           <Chatsocket
-            username={username} 
+            username={username}
             room={friendship_id}
           />
         )}

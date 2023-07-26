@@ -1,82 +1,79 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './NotificationsPage.css';
-import Avatar from '../components/Avatar';
 import placeholder from '../assets/placeholder.jpg';
+import axios from 'axios';
+import { url ,avatarurl} from '../utilis.js';
+import { setLoading } from '../redux/loadingSlice.js';
+import Loader from '../Loader.jsx'
+
 function NotificationsPage() {
-  const notifications = [
-    {
-      id: 1,
-      message: 'You have a new message from John Doe',
-      name: 'phidel',
-      time: '5 minutes ago',
-      read: false,
-      avatar: {Avatar},
-    },
-    {
-      id: 2,
-      message: 'You have a friend request from Jane Smith',
-      name:'delphino',
-      time: '1 hour ago',
-      read: true,
-      avatar: {Avatar},
-    },
-    {
-    id: 3,
-    message: 'You have a new message from John Doe',
-    name: 'oluoch',
-    time: '5 minutes ago',
-    read: false,
-    avatar: {Avatar},
-  },
-  {
-    id: 4,
-    message: 'You have a friend request from Jane Smith',
-    name:'omuya',
-    time: '1 hour ago',
-    read: true,
-    avatar: {Avatar},
-  },
-  {
-  id: 5,
-  message: 'You have a new message from John Doe',
-  name: 'otiya',
-  time: '5 minutes ago',
-  read: false,
-  avatar: {Avatar},
-},
-{
-  id: 6,
-  message: 'You have a friend request from Jane Smith',
-  name:'jakoti',
-  time: '1 hour ago',
-  read: true,
-  avatar: {Avatar},
-},
-    
-  ];
+  const [notifications, setNotifications] = useState([]);
+  const token = useSelector(state => state.user.token);
+  const isLoading = useSelector((state) => state.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      // Set loading to true before fetching notifications
+      dispatch(setLoading(true));
+
+      try {
+        const response = await axios.get(`${url}/notifications`,{
+          headers: {
+            'authorization': token
+          }
+        }); 
+        const data = response.data;
+      
+        setNotifications(data);
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      } finally {
+        
+        dispatch(setLoading(false));
+      }
+    };
+
+    fetchNotifications();
+  }, [dispatch, token]);
+
+  const handleNotificationClick = async (notificationID) => {
+    // Make a request to the backend API to update the notification status
+    try {
+      await axios.patch(`${url}/notifications/${notificationID}`, { read: true });
+      
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) =>
+          notification.notificationID === notificationID ? { ...notification, read: true } : notification
+        )
+      );
+    } catch (error) {
+      console.error('Error updating notification status:', error);
+    }
+  };
 
   return (
     <div className="notifications-container">
-    
-      {notifications.length === 0 ? (
-        <p>No new notifications</p>
+      {isLoading ? (
+        <Loader />
       ) : (
         <ul className="notification-list">
           {notifications.map((notification) => (
             <li
-              key={notification.id}
+              key={notification.notificationID}
               className={notification.read ? 'read' : 'unread'}
             >
-              <div className="notification-item">
+              <div className="notification-item animatedButton" onClick={() => handleNotificationClick(notification.notificationID)}>
                 <div className="notification-avatar">
                   @{notification.name}
-                  <img src={placeholder} alt="" />
+                  <img className="displayImg" src={`${avatarurl}/${notification.avatar}.jpeg`} alt="Profile pic" />
                 </div>
                 <div className="notification-content">
                   <div className="notification-message">
                     {notification.message}
                   </div>
-                  <div className="notification-time">{notification.time}</div>
+                  <div className="notification-time">{notification.timestamp}</div>
                 </div>
               </div>
             </li>

@@ -8,11 +8,12 @@ import {getFriends,deleteFriendship} from '../controllers/friendsController.js'
 import {authorizeMiddleware} from '../middlewares/authorizeMiddleware.js'
 import { updateprofile,getbio} from '../controllers/profileController.js'
 import {getPostsTrends} from '../controllers/trendsController.js'
+import { searchPosts } from '../controllers/searchController.js'
+import {getNotifications,updateNotificationStatus} from '../controllers/notificationsController.js'
 const delphitsocialRoutes = (app) => {
     app.route('/updateprofile')
         .post(authorizeMiddleware,updateprofile)
         .get(authorizeMiddleware,getbio)
-
     app.route('/posts')
         .post(authorizeMiddleware,createPost)
         .get(authorizeMiddleware,getAllPosts)
@@ -43,7 +44,14 @@ const delphitsocialRoutes = (app) => {
         .delete(deleteFriendship)
     app.route('/trends')
         .get(getPostsTrends)
-    
+    app.route('/search')
+        .get(searchPosts);
+
+    app.route('/notifications')
+        .get(authorizeMiddleware,getNotifications);
+    app.route('/notifications/:id')
+        .patch(authorizeMiddleware,updateNotificationStatus);
+
       
 }
 

@@ -103,7 +103,8 @@
     max-width: 70%;
     align-self: flex-start;
     border-radius: 10px;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   
   .message#you {
@@ -113,8 +114,10 @@
     
   }
   
-  .message-content {
+  .message-content p{
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
   }
   
   .message-meta {
@@ -122,6 +125,8 @@
     justify-content: flex-end;
     font-size: 12px;
     color: #888;
+    padding: 0;
+    margin: 0;
   }
   
   .chat-footer {

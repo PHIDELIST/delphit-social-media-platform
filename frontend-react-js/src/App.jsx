@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import {Amplify} from 'aws-amplify';
 import {region,userPoolId,clientId} from './utilis.js'
 import RecoveryPage from './pages/RecoveryPage'
-import ActivitiesPage from './pages/ActivitiesPage'
+
 Amplify.configure({
   "AWS_PROJECT_REGION": region,
   "aws_cognito_region": region,

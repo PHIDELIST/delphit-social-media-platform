@@ -64,3 +64,14 @@ CREATE TABLE Comments (
     REFERENCES Posts(postID)  ON DELETE CASCADE
 );
 
+CREATE TABLE Notifications (
+  notificationID INT PRIMARY KEY IDENTITY(1, 1),
+  recipientUserID NVARCHAR(500) NOT NULL,
+  message NVARCHAR(1000) NOT NULL,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  status NVARCHAR(10) NOT NULL,
+  CONSTRAINT FK_notification_recipientUserID
+    FOREIGN KEY (recipientUserID)
+    REFERENCES Users(userID) ON DELETE CASCADE
+);
+

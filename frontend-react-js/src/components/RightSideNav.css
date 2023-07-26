@@ -1,5 +1,5 @@
 #rightSideNav{
-    /* background-color: #74ABF3; */
+    background-color: #74ABF3;
     height: 96vh;
     padding-top: 15px;
     display: flex;
@@ -8,6 +8,7 @@
     align-items: center;
     position: fixed;
     width: 25%;
+    border-radius: 10px;
 }
 
 
